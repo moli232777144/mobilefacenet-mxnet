@@ -1,3 +1,12 @@
+
+---
+## 5月7日更新
+
+该实验方案，目前测试效果不佳，softmax预训练未达到预期在lfw上98+的识别率，待排查及进一步实验。如何在lr0.1下达到一个合理的预热，对后续是否能训练到最优识别率影响较大。
+
+
+---
+
 ## 前言
 
 本文主要记录下复现mobilefacenet的流程，参考mobilefacenet作者月生给的基本流程，基于insightface的4月27日
@@ -10,7 +19,6 @@
 1.拉取配置[insightface](https://github.com/deepinsight/insightface)工程的基础环境；
 
 2.softmax loss初调：lr0.1，softmax的fc7配置wd_mult=10.0和no_bias=True,训练4万步;
-
 
 切换到src目录下，修改train_softmax.py：
 179-182行：
@@ -69,6 +77,5 @@ CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss
 
 ## TODO
 
-- 三天后上传该方案验证日志log
 - 训练模型识别率等测试
 - ncnn框架移植mobilefacenet
