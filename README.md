@@ -1,7 +1,7 @@
 
 ---
 ## 5月9日更新
-实验二：切换arcface_loss训练,节选列出lfw最高一组acc结果：
+实验二：切换arcface_loss,节选列出lfw最高一组acc结果：
 
 ```
 [2018-05-09 02:28:45]  lr-batch-epoch: 0.01 534 15
@@ -38,11 +38,6 @@ parameter of the last layers after the global operator (GDConv or GAPool) being 
 ```
 
 修复错误：--wd设置0.00004，--fc7-wd-mult设置10，重新进行试验；
-<<<<<<< HEAD
-
-实验日志：softmax训练的acc持续提升，lfw上99+，转下一步训练；
-=======
->>>>>>> 1b5e6cdb8ae9009c8788c941d310331a87e8cc3e
 
 实验日志：softmax训练的acc持续提升，lfw上99+，转下一步训练；
 
@@ -117,5 +112,6 @@ CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss
 [insightface](https://github.com/deepinsight/insightface)
 
 ## TODO
+
 
 - ncnn框架移植mobilefacenet
