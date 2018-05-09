@@ -1,9 +1,45 @@
 
 ---
+## 5月9日更新
+实验二：切换arcface_loss训练,节选列出lfw最高一组acc结果：
+
+```
+[2018-05-09 02:28:45]  lr-batch-epoch: 0.01 534 15
+[2018-05-09 02:28:45]  testing verification..
+[2018-05-09 02:28:58]  (12000, 128)
+[2018-05-09 02:28:58]  infer time 12.946839
+[2018-05-09 02:29:02]  [lfw][112000]XNorm: 11.147283
+[2018-05-09 02:29:02]  [lfw][112000]Accuracy-Flip: 0.99517+-0.00450
+[2018-05-09 02:29:02]  testing verification..
+[2018-05-09 02:29:18]  (14000, 128)
+[2018-05-09 02:29:18]  infer time 15.957752
+[2018-05-09 02:29:23]  [cfp_fp][112000]XNorm: 9.074075
+[2018-05-09 02:29:23]  [cfp_fp][112000]Accuracy-Flip: 0.88457+-0.01533
+[2018-05-09 02:29:23]  testing verification..
+[2018-05-09 02:29:35]  (12000, 128)
+[2018-05-09 02:29:35]  infer time 12.255588
+[2018-05-09 02:29:39]  [agedb_30][112000]XNorm: 11.038146
+[2018-05-09 02:29:39]  [agedb_30][112000]Accuracy-Flip: 0.95067+-0.00907
+```
+
+目前离论文要求识别率已非常接近，下组实验增加迭代轮数，判断是否因为单卡原因；
+
+---
 ## 5月7日更新
 
-该实验方案，目前测试效果不佳，softmax预训练未达到预期在lfw上98+的识别率，待排查及进一步实验。如何在lr0.1下达到一个合理的预热，对后续是否能训练到最优识别率影响较大。
+实验一，目前测试效果不佳，softmax预训练未达到预期在lfw上98+的识别率，待排查及进一步实验。如何在lr0.1下达到一个合理的预训练区间，对后续是否能训练到最优识别率影响较大。
 
+实验二：
+
+论文指出：
+```
+We set the weight decay parameter to be 4e-5, except the weight decay 
+parameter of the last layers after the global operator (GDConv or GAPool) being 4e-4. 
+```
+
+修复错误：--wd设置0.00004，--fc7-wd-mult设置10，重新进行试验；
+
+实验日志：softmax训练的acc持续提升，lfw上99+，转下一步训练；
 
 ---
 
@@ -51,7 +87,7 @@
 
 运行：
 ```
-CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss-type 0 --per-batch-size 512 --emb-size 128 --fc7-wd-mult 10  --data-dir  ../datasets/faces_ms1m_112x112  --prefix ../models/MobileFaceNet/model-y1-softmax
+CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss-type 0 --lr-steps 80000,120000 --wd 0.00004 --fc7-wd-mult 10 --per-batch-size 512 --emb-size 128  --data-dir  ../datasets/faces_ms1m_112x112  --prefix ../models/MobileFaceNet/model-y1-softmax
 ```
  
 
@@ -60,13 +96,13 @@ CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss
 切换到src目录下：
 
 ```
-CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss-type 4 --lr-steps 80000,120000,140000,160000 --emb-size 128 --per-batch-size 512 --data-dir ../datasets/faces_ms1m_112x112 --pretrained ../models/MobileFaceNet/model-y1-softmax,20 --prefix ../models/MobileFaceNet/model-y1-arcface
+CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss-type 4 --lr-steps 80000,120000,140000,160000 --wd 0.00004 --fc7-wd-mult 10 --emb-size 128 --per-batch-size 512 --data-dir ../datasets/faces_ms1m_112x112 --pretrained ../models/MobileFaceNet/model-y1-softmax,20 --prefix ../models/MobileFaceNet/model-y1-arcface
 ```
 
 4.agedb精调：从3步训练好的模型继续用arcface loss训练，s=128, m=0.5，起始lr=0.001，在[20000, 30000, 40000]步降低lr，这时能得到lfw acc 0.9955左右，agedb-30 acc 0.96左右的最终模型。
 
 ```
-CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss-type 4 --lr 0.001 --lr-steps 20000,30000,40000 --emb-size 128 --per-batch-size 512 --margin-s 128 --data-dir ../datasets/faces_ms1m_112x112 --pretrained ../models/MobileFaceNet/model-y1-arcface,80 --prefix ../models/MobileFaceNet/model-y1-arcface
+CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss-type 4 --lr 0.001 --lr-steps 20000,30000,40000 --wd 0.00004 --fc7-wd-mult 10 --emb-size 128 --per-batch-size 512 --margin-s 128 --data-dir ../datasets/faces_ms1m_112x112 --pretrained ../models/MobileFaceNet/model-y1-arcface,80 --prefix ../models/MobileFaceNet/model-y1-arcface
 ```
 
 ## 相关参考：
@@ -77,5 +113,4 @@ CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss
 
 ## TODO
 
-- 训练模型识别率等测试
 - ncnn框架移植mobilefacenet
