@@ -1,0 +1,37 @@
+7767517
+35 45
+Input            input            0 1 data 0=128 1=128 2=1
+Convolution      conv1            1 1 data conv1 0=96 1=5 2=1 3=1 4=2 5=1 6=2400
+Slice            slice1           1 2 conv1 slice1_1 slice1_2 -23300=2,-233,-233 1=0
+Eltwise          etlwise1         2 1 slice1_1 slice1_2 eltwise1 0=2 -23301=0
+Pooling          pool1            1 1 eltwise1 pool1 0=0 1=2 2=2 3=0 4=0
+Convolution      conv2a           1 1 pool1 conv2a 0=96 1=1 2=1 3=1 4=0 5=1 6=4608
+Slice            slice2a          1 2 conv2a slice2a_1 slice2a_2 -23300=2,-233,-233 1=0
+Eltwise          etlwise2a        2 1 slice2a_1 slice2a_2 eltwise2a 0=2 -23301=0
+Convolution      conv2            1 1 eltwise2a conv2 0=192 1=3 2=1 3=1 4=1 5=1 6=82944
+Slice            slice2           1 2 conv2 slice2_1 slice2_2 -23300=2,-233,-233 1=0
+Eltwise          etlwise2         2 1 slice2_1 slice2_2 eltwise2 0=2 -23301=0
+Pooling          pool2            1 1 eltwise2 pool2 0=0 1=2 2=2 3=0 4=0
+Convolution      conv3a           1 1 pool2 conv3a 0=192 1=1 2=1 3=1 4=0 5=1 6=18432
+Slice            slice3a          1 2 conv3a slice3a_1 slice3a_2 -23300=2,-233,-233 1=0
+Eltwise          etlwise3a        2 1 slice3a_1 slice3a_2 eltwise3a 0=2 -23301=0
+Convolution      conv3            1 1 eltwise3a conv3 0=384 1=3 2=1 3=1 4=1 5=1 6=331776
+Slice            slice3           1 2 conv3 slice3_1 slice3_2 -23300=2,-233,-233 1=0
+Eltwise          etlwise3         2 1 slice3_1 slice3_2 eltwise3 0=2 -23301=0
+Pooling          pool3            1 1 eltwise3 pool3 0=0 1=2 2=2 3=0 4=0
+Convolution      conv4a           1 1 pool3 conv4a 0=384 1=1 2=1 3=1 4=0 5=1 6=73728
+Slice            slice4a          1 2 conv4a slice4a_1 slice4a_2 -23300=2,-233,-233 1=0
+Eltwise          etlwise4a        2 1 slice4a_1 slice4a_2 eltwise4a 0=2 -23301=0
+Convolution      conv4            1 1 eltwise4a conv4 0=256 1=3 2=1 3=1 4=1 5=1 6=442368
+Slice            slice4           1 2 conv4 slice4_1 slice4_2 -23300=2,-233,-233 1=0
+Eltwise          etlwise4         2 1 slice4_1 slice4_2 eltwise4 0=2 -23301=0
+Convolution      conv5a           1 1 eltwise4 conv5a 0=256 1=1 2=1 3=1 4=0 5=1 6=32768
+Slice            slice5a          1 2 conv5a slice5a_1 slice5a_2 -23300=2,-233,-233 1=0
+Eltwise          etlwise5a        2 1 slice5a_1 slice5a_2 eltwise5a 0=2 -23301=0
+Convolution      conv5            1 1 eltwise5a conv5 0=256 1=3 2=1 3=1 4=1 5=1 6=294912
+Slice            slice5           1 2 conv5 slice5_1 slice5_2 -23300=2,-233,-233 1=0
+Eltwise          etlwise5         2 1 slice5_1 slice5_2 eltwise5 0=2 -23301=0
+Pooling          pool4            1 1 eltwise5 pool4 0=0 1=2 2=2 3=0 4=0
+InnerProduct     fc1              1 1 pool4 fc1 0=512 1=1 2=4194304
+Slice            slice_fc1        1 2 fc1 slice_fc1_1 slice_fc1_2 -23300=2,-233,-233 1=0
+Eltwise          etlwise_fc1      2 1 slice_fc1_1 slice_fc1_2 eltwise_fc1 0=2 -23301=0

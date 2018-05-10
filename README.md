@@ -1,7 +1,12 @@
 
 ---
+## 5月10日更新
+
+更新ncnn转换测试步骤；
+
+---
 ## 5月9日更新
-实验二：切换arcface_loss训练,节选列出lfw最高一组acc结果：
+实验二：切换arcface_loss,节选列出lfw最高一组acc结果：
 
 ```
 [2018-05-09 02:28:45]  lr-batch-epoch: 0.01 534 15
@@ -24,6 +29,7 @@
 
 目前离论文要求识别率已非常接近，下组实验增加迭代轮数，判断是否因为单卡原因；
 
+
 ---
 ## 5月7日更新
 
@@ -40,6 +46,7 @@ parameter of the last layers after the global operator (GDConv or GAPool) being 
 修复错误：--wd设置0.00004，--fc7-wd-mult设置10，重新进行试验；
 
 实验日志：softmax训练的acc持续提升，lfw上99+，转下一步训练；
+
 
 ---
 
@@ -103,6 +110,77 @@ CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss
 
 ```
 CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss-type 4 --lr 0.001 --lr-steps 20000,30000,40000 --wd 0.00004 --fc7-wd-mult 10 --emb-size 128 --per-batch-size 512 --margin-s 128 --data-dir ../datasets/faces_ms1m_112x112 --pretrained ../models/MobileFaceNet/model-y1-arcface,80 --prefix ../models/MobileFaceNet/model-y1-arcface
+```
+
+
+
+## ncnn转换步骤
+
+1.去除模型fc7层，切换insightface/deploy目录下
+
+```
+python models_slim.py --model ../models/MobileFaceNet/model-y1-arcface,40
+```
+
+2.编译最新版本[ncnn](https://github.com/Tencent/ncnn)的mxnet2ncnn工具；
+或直接运行mxnet文件夹的mxnet2ncnn.bat脚本
+
+
+```
+mxnet2ncnn.exe model-y1-arcface-symbol.json model-y1-arcface-0000.params mobilefacenet.param mobilefacenet.bin
+```
+3.速度测试，增加ncnn的benchncnn工程
+复制ncnn目录文件到sdcard卡下，运行下列指令
+```
+adb shell
+cp /sdcard/ncnn/* /data/local/tmp/
+cd /data/local/tmp/
+chmod 0775 benchncnn
+./benchncnn 8 8 0
+```
+附高通625测试结果：
+四线程：
+```
+loop_count = 8
+num_threads = 4
+powersave = 0
+   mobilefacenet  min =   41.44  max =  125.16  avg =   61.43
+ light_cnn_small  min =   28.45  max =   32.23  avg =   30.10
+  LightenedCNN_A  min =  476.45  max =  489.83  avg =  482.24
+  LightenedCNN_B  min =  100.70  max =  104.21  avg =  102.52
+      squeezenet  min =   64.73  max =   83.19  avg =   68.53
+       mobilenet  min =  120.67  max =  128.20  avg =  124.52
+    mobilenet_v2  min =  110.60  max =  220.12  avg =  125.52
+      shufflenet  min =   42.43  max =   50.24  avg =   44.86
+       googlenet  min =  212.73  max =  228.50  avg =  217.07
+        resnet18  min =  230.79  max =  285.95  avg =  246.40
+         alexnet  min =  402.55  max =  429.71  avg =  414.41
+           vgg16  min = 1622.61  max = 1942.04  avg = 1766.67
+  squeezenet-ssd  min =  161.68  max =  290.63  avg =  186.38
+   mobilenet-ssd  min =  213.72  max =  245.10  avg =  223.55
+
+```
+八线程：
+```
+M6Note:/data/local/tmp $ ./benchncnn 8 8 0
+loop_count = 8
+num_threads = 8
+powersave = 0
+   mobilefacenet  min =   27.77  max =   31.11  avg =   28.87
+ light_cnn_small  min =   19.77  max =   25.76  avg =   21.89
+  LightenedCNN_A  min =  236.45  max =  341.60  avg =  262.61
+  LightenedCNN_B  min =   75.45  max =   79.63  avg =   77.04
+      squeezenet  min =   44.78  max =   74.40  avg =   49.59
+       mobilenet  min =   75.61  max =   93.74  avg =   82.04
+    mobilenet_v2  min =   76.06  max =  104.26  avg =   80.32
+      shufflenet  min =   30.33  max =   79.53  avg =   36.89
+       googlenet  min =  135.60  max =  276.84  avg =  179.23
+        resnet18  min =  164.25  max =  224.34  avg =  181.24
+         alexnet  min =  225.19  max =  342.46  avg =  250.83
+           vgg16  min = 1631.73  max = 2040.82  avg = 1762.53
+  squeezenet-ssd  min =  148.15  max =  260.45  avg =  169.15
+   mobilenet-ssd  min =  163.48  max =  198.45  avg =  181.06
+
 ```
 
 ## 相关参考：
