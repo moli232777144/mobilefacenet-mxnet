@@ -1,0 +1,1305 @@
+# 实验二补充验证实验：验证lr0.1迭代是否充分，自身acc仍有小幅提升，将继续实验延长迭代步数；
+[2018-05-10 23:57:09]  /usr/local/lib/python2.7/dist-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+[2018-05-10 23:57:09]    from ._conv import register_converters as _register_converters
+[2018-05-10 23:57:09]  gpu num: 1
+[2018-05-10 23:57:09]  num_layers 1
+[2018-05-10 23:57:09]  image_size [112, 112]
+[2018-05-10 23:57:09]  num_classes 85164
+[2018-05-10 23:57:09]  Called with argument: Namespace(batch_size=512, beta=1000.0, beta_freeze=0, beta_min=5.0, bn_mom=0.9, ckpt=2, ctx_num=1, cutoff=0, data_dir='/data/data/', easy_margin=0, emb_size=128, end_epoch=100000, fc7_wd_mult=10.0, gamma=0.12, image_channel=3, image_h=112, image_w=112, loss_type=4, lr=0.1, lr_steps='80000,120000,140000,160000', margin=4, margin_a=1.0, margin_b=0.0, margin_m=0.5, margin_s=64.0, max_steps=0, mom=0.9, network='y1', num_classes=85164, num_gpus=1, num_layers=1, output_dir='/data/output/', per_batch_size=512, power=1.0, prefix='/data/output/model-y1-arcface', pretrained='/data/output/model-y1-arcface,20', rand_mirror=1, rescale_threshold=0, scale=0.9993, target='lfw,cfp_fp,agedb_30', use_deformable=0, verbose=2000, version_act='prelu', version_input=1, version_output='E', version_se=0, version_unit=3, wd=4e-05, work_dir='/data/')
+[2018-05-10 23:57:09]  loading ['/data/output/model-y1-arcface', '20']
+[2018-05-10 23:57:10]  init mobilefacenet 1
+[2018-05-10 23:57:10]  INFO:root:loading recordio /data/data/train.rec...
+[2018-05-10 23:57:17]  /root/mxnet/python/mxnet/recordio.py:370: DeprecationWarning: The binary mode of fromstring is deprecated, as it behaves surprisingly on unicode inputs. Use frombuffer instead
+[2018-05-10 23:57:17]    header = header._replace(label=np.fromstring(s, np.float32, header.flag))
+[2018-05-10 23:57:17]  header0 label [3804847. 3890011.]
+[2018-05-10 23:57:21]  id2range 85164
+[2018-05-10 23:57:21]  3804846
+[2018-05-10 23:57:21]  rand_mirror 1
+[2018-05-10 23:57:21]  loading bin 0
+[2018-05-10 23:57:22]  loading bin 1000
+[2018-05-10 23:57:23]  loading bin 2000
+[2018-05-10 23:57:24]  loading bin 3000
+[2018-05-10 23:57:25]  loading bin 4000
+[2018-05-10 23:57:26]  loading bin 5000
+[2018-05-10 23:57:27]  loading bin 6000
+[2018-05-10 23:57:28]  loading bin 7000
+[2018-05-10 23:57:29]  loading bin 8000
+[2018-05-10 23:57:30]  loading bin 9000
+[2018-05-10 23:57:31]  loading bin 10000
+[2018-05-10 23:57:32]  loading bin 11000
+[2018-05-10 23:57:33]  (12000L, 3L, 112L, 112L)
+[2018-05-10 23:57:33]  ver lfw
+[2018-05-10 23:57:33]  loading bin 0
+[2018-05-10 23:57:34]  loading bin 1000
+[2018-05-10 23:57:35]  loading bin 2000
+[2018-05-10 23:57:36]  loading bin 3000
+[2018-05-10 23:57:37]  loading bin 4000
+[2018-05-10 23:57:38]  loading bin 5000
+[2018-05-10 23:57:39]  loading bin 6000
+[2018-05-10 23:57:40]  loading bin 7000
+[2018-05-10 23:57:41]  loading bin 8000
+[2018-05-10 23:57:42]  loading bin 9000
+[2018-05-10 23:57:43]  loading bin 10000
+[2018-05-10 23:57:44]  loading bin 11000
+[2018-05-10 23:57:45]  loading bin 12000
+[2018-05-10 23:57:46]  loading bin 13000
+[2018-05-10 23:57:47]  (14000L, 3L, 112L, 112L)
+[2018-05-10 23:57:47]  ver cfp_fp
+[2018-05-10 23:57:48]  loading bin 0
+[2018-05-10 23:57:49]  loading bin 1000
+[2018-05-10 23:57:50]  loading bin 2000
+[2018-05-10 23:57:51]  loading bin 3000
+[2018-05-10 23:57:52]  loading bin 4000
+[2018-05-10 23:57:53]  loading bin 5000
+[2018-05-10 23:57:54]  loading bin 6000
+[2018-05-10 23:57:55]  loading bin 7000
+[2018-05-10 23:57:56]  loading bin 8000
+[2018-05-10 23:57:57]  loading bin 9000
+[2018-05-10 23:57:58]  loading bin 10000
+[2018-05-10 23:57:59]  loading bin 11000
+[2018-05-10 23:58:00]  (12000L, 3L, 112L, 112L)
+[2018-05-10 23:58:00]  ver agedb_30
+[2018-05-10 23:58:00]  lr_steps [80000, 120000, 140000, 160000]
+[2018-05-10 23:58:07]  [15:58:07] src/operator/nn/./cudnn/./cudnn_algoreg-inl.h:107: Running performance tests to find the best convolution algorithm, this can take a while... (setting env variable MXNET_CUDNN_AUTOTUNE_DEFAULT to 0 to disable)
+[2018-05-10 23:58:09]  /root/mxnet/python/mxnet/module/base_module.py:466: UserWarning: Optimizer created manually outside Module but rescale_grad is not normalized to 1.0/batch_size/num_workers (1.0 vs. 0.001953125). Is this intended?
+[2018-05-10 23:58:09]    optimizer_params=optimizer_params)
+[2018-05-10 23:58:09]  call reset()
+[2018-05-10 23:58:30]  INFO:root:Epoch[0] Batch [20]	Speed: 589.16 samples/sec	acc=0.349144
+[2018-05-10 23:58:48]  INFO:root:Epoch[0] Batch [40]	Speed: 585.08 samples/sec	acc=0.342285
+[2018-05-10 23:59:05]  INFO:root:Epoch[0] Batch [60]	Speed: 582.27 samples/sec	acc=0.339844
+[2018-05-10 23:59:23]  INFO:root:Epoch[0] Batch [80]	Speed: 584.97 samples/sec	acc=0.335254
+[2018-05-10 23:59:41]  INFO:root:Epoch[0] Batch [100]	Speed: 584.56 samples/sec	acc=0.341895
+[2018-05-10 23:59:58]  INFO:root:Epoch[0] Batch [120]	Speed: 585.32 samples/sec	acc=0.341309
+[2018-05-11 00:00:16]  INFO:root:Epoch[0] Batch [140]	Speed: 584.12 samples/sec	acc=0.338281
+[2018-05-11 00:00:33]  INFO:root:Epoch[0] Batch [160]	Speed: 578.82 samples/sec	acc=0.348047
+[2018-05-11 00:00:51]  INFO:root:Epoch[0] Batch [180]	Speed: 589.59 samples/sec	acc=0.341211
+[2018-05-11 00:01:08]  INFO:root:Epoch[0] Batch [200]	Speed: 586.02 samples/sec	acc=0.328223
+[2018-05-11 00:01:26]  INFO:root:Epoch[0] Batch [220]	Speed: 586.53 samples/sec	acc=0.329297
+[2018-05-11 00:01:43]  INFO:root:Epoch[0] Batch [240]	Speed: 583.88 samples/sec	acc=0.325293
+[2018-05-11 00:02:01]  INFO:root:Epoch[0] Batch [260]	Speed: 578.43 samples/sec	acc=0.341504
+[2018-05-11 00:02:18]  INFO:root:Epoch[0] Batch [280]	Speed: 582.60 samples/sec	acc=0.330566
+[2018-05-11 00:02:36]  INFO:root:Epoch[0] Batch [300]	Speed: 583.94 samples/sec	acc=0.319434
+[2018-05-11 00:02:53]  INFO:root:Epoch[0] Batch [320]	Speed: 583.50 samples/sec	acc=0.331152
+[2018-05-11 00:03:11]  INFO:root:Epoch[0] Batch [340]	Speed: 584.02 samples/sec	acc=0.321875
+[2018-05-11 00:03:29]  INFO:root:Epoch[0] Batch [360]	Speed: 579.85 samples/sec	acc=0.317383
+[2018-05-11 00:03:46]  INFO:root:Epoch[0] Batch [380]	Speed: 584.41 samples/sec	acc=0.332813
+[2018-05-11 00:04:04]  INFO:root:Epoch[0] Batch [400]	Speed: 586.03 samples/sec	acc=0.326367
+[2018-05-11 00:04:21]  INFO:root:Epoch[0] Batch [420]	Speed: 583.29 samples/sec	acc=0.322852
+[2018-05-11 00:04:39]  INFO:root:Epoch[0] Batch [440]	Speed: 582.49 samples/sec	acc=0.316797
+[2018-05-11 00:04:56]  INFO:root:Epoch[0] Batch [460]	Speed: 582.05 samples/sec	acc=0.322168
+[2018-05-11 00:05:14]  INFO:root:Epoch[0] Batch [480]	Speed: 578.19 samples/sec	acc=0.334277
+[2018-05-11 00:05:32]  INFO:root:Epoch[0] Batch [500]	Speed: 584.66 samples/sec	acc=0.316309
+[2018-05-11 00:05:49]  INFO:root:Epoch[0] Batch [520]	Speed: 582.98 samples/sec	acc=0.327832
+[2018-05-11 00:06:07]  INFO:root:Epoch[0] Batch [540]	Speed: 584.51 samples/sec	acc=0.315234
+[2018-05-11 00:06:24]  INFO:root:Epoch[0] Batch [560]	Speed: 584.95 samples/sec	acc=0.323242
+[2018-05-11 00:06:42]  INFO:root:Epoch[0] Batch [580]	Speed: 583.28 samples/sec	acc=0.328809
+[2018-05-11 00:06:59]  INFO:root:Epoch[0] Batch [600]	Speed: 584.21 samples/sec	acc=0.322266
+[2018-05-11 00:07:17]  INFO:root:Epoch[0] Batch [620]	Speed: 584.33 samples/sec	acc=0.320410
+[2018-05-11 00:07:34]  INFO:root:Epoch[0] Batch [640]	Speed: 583.39 samples/sec	acc=0.319434
+[2018-05-11 00:07:52]  INFO:root:Epoch[0] Batch [660]	Speed: 584.03 samples/sec	acc=0.322461
+[2018-05-11 00:08:09]  INFO:root:Epoch[0] Batch [680]	Speed: 582.13 samples/sec	acc=0.327246
+[2018-05-11 00:08:27]  INFO:root:Epoch[0] Batch [700]	Speed: 584.46 samples/sec	acc=0.320312
+[2018-05-11 00:08:44]  INFO:root:Epoch[0] Batch [720]	Speed: 585.54 samples/sec	acc=0.323535
+[2018-05-11 00:09:02]  INFO:root:Epoch[0] Batch [740]	Speed: 584.77 samples/sec	acc=0.311719
+[2018-05-11 00:09:20]  INFO:root:Epoch[0] Batch [760]	Speed: 584.90 samples/sec	acc=0.311523
+[2018-05-11 00:09:37]  INFO:root:Epoch[0] Batch [780]	Speed: 583.42 samples/sec	acc=0.317773
+[2018-05-11 00:09:55]  INFO:root:Epoch[0] Batch [800]	Speed: 583.45 samples/sec	acc=0.311719
+[2018-05-11 00:10:12]  INFO:root:Epoch[0] Batch [820]	Speed: 578.80 samples/sec	acc=0.317383
+[2018-05-11 00:10:30]  INFO:root:Epoch[0] Batch [840]	Speed: 581.99 samples/sec	acc=0.320215
+[2018-05-11 00:10:47]  INFO:root:Epoch[0] Batch [860]	Speed: 583.52 samples/sec	acc=0.315430
+[2018-05-11 00:11:05]  INFO:root:Epoch[0] Batch [880]	Speed: 584.44 samples/sec	acc=0.303320
+[2018-05-11 00:11:23]  INFO:root:Epoch[0] Batch [900]	Speed: 583.98 samples/sec	acc=0.313477
+[2018-05-11 00:11:40]  INFO:root:Epoch[0] Batch [920]	Speed: 580.90 samples/sec	acc=0.317773
+[2018-05-11 00:11:58]  INFO:root:Epoch[0] Batch [940]	Speed: 584.75 samples/sec	acc=0.309375
+[2018-05-11 00:12:15]  INFO:root:Epoch[0] Batch [960]	Speed: 580.56 samples/sec	acc=0.319238
+[2018-05-11 00:12:33]  INFO:root:Epoch[0] Batch [980]	Speed: 584.77 samples/sec	acc=0.309082
+[2018-05-11 00:12:49]  lr-batch-epoch: 0.1 999 0
+[2018-05-11 00:12:50]  INFO:root:Epoch[0] Batch [1000]	Speed: 585.22 samples/sec	acc=0.310352
+[2018-05-11 00:13:08]  INFO:root:Epoch[0] Batch [1020]	Speed: 584.17 samples/sec	acc=0.310449
+[2018-05-11 00:13:25]  INFO:root:Epoch[0] Batch [1040]	Speed: 584.33 samples/sec	acc=0.316504
+[2018-05-11 00:13:43]  INFO:root:Epoch[0] Batch [1060]	Speed: 584.76 samples/sec	acc=0.298730
+[2018-05-11 00:14:01]  INFO:root:Epoch[0] Batch [1080]	Speed: 579.61 samples/sec	acc=0.313867
+[2018-05-11 00:14:18]  INFO:root:Epoch[0] Batch [1100]	Speed: 584.60 samples/sec	acc=0.312793
+[2018-05-11 00:14:36]  INFO:root:Epoch[0] Batch [1120]	Speed: 580.50 samples/sec	acc=0.310254
+[2018-05-11 00:14:53]  INFO:root:Epoch[0] Batch [1140]	Speed: 581.32 samples/sec	acc=0.306738
+[2018-05-11 00:15:11]  INFO:root:Epoch[0] Batch [1160]	Speed: 583.56 samples/sec	acc=0.307324
+[2018-05-11 00:15:29]  INFO:root:Epoch[0] Batch [1180]	Speed: 581.05 samples/sec	acc=0.305371
+[2018-05-11 00:15:46]  INFO:root:Epoch[0] Batch [1200]	Speed: 581.30 samples/sec	acc=0.304883
+[2018-05-11 00:16:04]  INFO:root:Epoch[0] Batch [1220]	Speed: 573.09 samples/sec	acc=0.313184
+[2018-05-11 00:16:21]  INFO:root:Epoch[0] Batch [1240]	Speed: 595.57 samples/sec	acc=0.307715
+[2018-05-11 00:16:39]  INFO:root:Epoch[0] Batch [1260]	Speed: 582.38 samples/sec	acc=0.303125
+[2018-05-11 00:16:56]  INFO:root:Epoch[0] Batch [1280]	Speed: 584.70 samples/sec	acc=0.314844
+[2018-05-11 00:17:14]  INFO:root:Epoch[0] Batch [1300]	Speed: 584.08 samples/sec	acc=0.309570
+[2018-05-11 00:17:31]  INFO:root:Epoch[0] Batch [1320]	Speed: 584.55 samples/sec	acc=0.305469
+[2018-05-11 00:17:49]  INFO:root:Epoch[0] Batch [1340]	Speed: 581.14 samples/sec	acc=0.306738
+[2018-05-11 00:18:07]  INFO:root:Epoch[0] Batch [1360]	Speed: 576.19 samples/sec	acc=0.304297
+[2018-05-11 00:18:24]  INFO:root:Epoch[0] Batch [1380]	Speed: 581.99 samples/sec	acc=0.310059
+[2018-05-11 00:18:42]  INFO:root:Epoch[0] Batch [1400]	Speed: 585.85 samples/sec	acc=0.315820
+[2018-05-11 00:18:59]  INFO:root:Epoch[0] Batch [1420]	Speed: 580.52 samples/sec	acc=0.310449
+[2018-05-11 00:19:17]  INFO:root:Epoch[0] Batch [1440]	Speed: 587.62 samples/sec	acc=0.308398
+[2018-05-11 00:19:34]  INFO:root:Epoch[0] Batch [1460]	Speed: 583.48 samples/sec	acc=0.316797
+[2018-05-11 00:19:52]  INFO:root:Epoch[0] Batch [1480]	Speed: 582.10 samples/sec	acc=0.299023
+[2018-05-11 00:20:10]  INFO:root:Epoch[0] Batch [1500]	Speed: 583.27 samples/sec	acc=0.315625
+[2018-05-11 00:20:27]  INFO:root:Epoch[0] Batch [1520]	Speed: 583.64 samples/sec	acc=0.308105
+[2018-05-11 00:20:45]  INFO:root:Epoch[0] Batch [1540]	Speed: 586.68 samples/sec	acc=0.303027
+[2018-05-11 00:21:02]  INFO:root:Epoch[0] Batch [1560]	Speed: 585.43 samples/sec	acc=0.308105
+[2018-05-11 00:21:20]  INFO:root:Epoch[0] Batch [1580]	Speed: 585.24 samples/sec	acc=0.305664
+[2018-05-11 00:21:37]  INFO:root:Epoch[0] Batch [1600]	Speed: 584.51 samples/sec	acc=0.306055
+[2018-05-11 00:21:55]  INFO:root:Epoch[0] Batch [1620]	Speed: 584.57 samples/sec	acc=0.304590
+[2018-05-11 00:22:12]  INFO:root:Epoch[0] Batch [1640]	Speed: 584.50 samples/sec	acc=0.303125
+[2018-05-11 00:22:30]  INFO:root:Epoch[0] Batch [1660]	Speed: 585.61 samples/sec	acc=0.308008
+[2018-05-11 00:22:47]  INFO:root:Epoch[0] Batch [1680]	Speed: 583.85 samples/sec	acc=0.304199
+[2018-05-11 00:23:05]  INFO:root:Epoch[0] Batch [1700]	Speed: 582.42 samples/sec	acc=0.311426
+[2018-05-11 00:23:22]  INFO:root:Epoch[0] Batch [1720]	Speed: 587.32 samples/sec	acc=0.301074
+[2018-05-11 00:23:40]  INFO:root:Epoch[0] Batch [1740]	Speed: 584.11 samples/sec	acc=0.297070
+[2018-05-11 00:23:57]  INFO:root:Epoch[0] Batch [1760]	Speed: 582.45 samples/sec	acc=0.305078
+[2018-05-11 00:24:15]  INFO:root:Epoch[0] Batch [1780]	Speed: 585.48 samples/sec	acc=0.304297
+[2018-05-11 00:24:32]  INFO:root:Epoch[0] Batch [1800]	Speed: 584.45 samples/sec	acc=0.306348
+[2018-05-11 00:24:50]  INFO:root:Epoch[0] Batch [1820]	Speed: 584.37 samples/sec	acc=0.308301
+[2018-05-11 00:25:07]  INFO:root:Epoch[0] Batch [1840]	Speed: 584.21 samples/sec	acc=0.300000
+[2018-05-11 00:25:25]  INFO:root:Epoch[0] Batch [1860]	Speed: 582.16 samples/sec	acc=0.299023
+[2018-05-11 00:25:42]  INFO:root:Epoch[0] Batch [1880]	Speed: 586.76 samples/sec	acc=0.307324
+[2018-05-11 00:26:00]  INFO:root:Epoch[0] Batch [1900]	Speed: 586.04 samples/sec	acc=0.295508
+[2018-05-11 00:26:17]  INFO:root:Epoch[0] Batch [1920]	Speed: 585.09 samples/sec	acc=0.298633
+[2018-05-11 00:26:35]  INFO:root:Epoch[0] Batch [1940]	Speed: 585.82 samples/sec	acc=0.303418
+[2018-05-11 00:26:52]  INFO:root:Epoch[0] Batch [1960]	Speed: 588.15 samples/sec	acc=0.298926
+[2018-05-11 00:27:10]  INFO:root:Epoch[0] Batch [1980]	Speed: 585.46 samples/sec	acc=0.297168
+[2018-05-11 00:27:26]  lr-batch-epoch: 0.1 1999 0
+[2018-05-11 00:27:26]  testing verification..
+[2018-05-11 00:27:43]  (12000, 128)
+[2018-05-11 00:27:43]  infer time 16.571394
+[2018-05-11 00:27:47]  [lfw][2000]XNorm: 11.060663
+[2018-05-11 00:27:47]  [lfw][2000]Accuracy-Flip: 0.99317+-0.00437
+[2018-05-11 00:27:47]  testing verification..
+[2018-05-11 00:28:06]  (14000, 128)
+[2018-05-11 00:28:06]  infer time 18.700949
+[2018-05-11 00:28:11]  [cfp_fp][2000]XNorm: 8.959421
+[2018-05-11 00:28:11]  [cfp_fp][2000]Accuracy-Flip: 0.87543+-0.01760
+[2018-05-11 00:28:11]  testing verification..
+[2018-05-11 00:28:27]  (12000, 128)
+[2018-05-11 00:28:27]  infer time 15.627269
+[2018-05-11 00:28:31]  [agedb_30][2000]XNorm: 10.917455
+[2018-05-11 00:28:31]  [agedb_30][2000]Accuracy-Flip: 0.94350+-0.00938
+[2018-05-11 00:28:31]  saving 1
+[2018-05-11 00:28:31]  [2000]Accuracy-Highest: 0.94350
+[2018-05-11 00:28:31]  INFO:root:Saved checkpoint to "/data/output/model-y1-arcface-0001.params"
+[2018-05-11 00:28:32]  INFO:root:Epoch[0] Batch [2000]	Speed: 124.85 samples/sec	acc=0.301953
+[2018-05-11 00:28:49]  INFO:root:Epoch[0] Batch [2020]	Speed: 593.98 samples/sec	acc=0.308398
+[2018-05-11 00:29:07]  INFO:root:Epoch[0] Batch [2040]	Speed: 583.97 samples/sec	acc=0.305566
+[2018-05-11 00:29:24]  INFO:root:Epoch[0] Batch [2060]	Speed: 584.58 samples/sec	acc=0.307422
+[2018-05-11 00:29:42]  INFO:root:Epoch[0] Batch [2080]	Speed: 585.24 samples/sec	acc=0.300098
+[2018-05-11 00:29:59]  INFO:root:Epoch[0] Batch [2100]	Speed: 585.73 samples/sec	acc=0.293066
+[2018-05-11 00:30:17]  INFO:root:Epoch[0] Batch [2120]	Speed: 580.69 samples/sec	acc=0.302148
+[2018-05-11 00:30:34]  INFO:root:Epoch[0] Batch [2140]	Speed: 581.64 samples/sec	acc=0.301855
+[2018-05-11 00:30:52]  INFO:root:Epoch[0] Batch [2160]	Speed: 582.98 samples/sec	acc=0.297949
+[2018-05-11 00:31:09]  INFO:root:Epoch[0] Batch [2180]	Speed: 586.22 samples/sec	acc=0.308105
+[2018-05-11 00:31:27]  INFO:root:Epoch[0] Batch [2200]	Speed: 585.92 samples/sec	acc=0.307324
+[2018-05-11 00:31:44]  INFO:root:Epoch[0] Batch [2220]	Speed: 587.94 samples/sec	acc=0.301074
+[2018-05-11 00:32:02]  INFO:root:Epoch[0] Batch [2240]	Speed: 583.71 samples/sec	acc=0.302539
+[2018-05-11 00:32:19]  INFO:root:Epoch[0] Batch [2260]	Speed: 585.71 samples/sec	acc=0.303516
+[2018-05-11 00:32:37]  INFO:root:Epoch[0] Batch [2280]	Speed: 584.31 samples/sec	acc=0.300977
+[2018-05-11 00:32:54]  INFO:root:Epoch[0] Batch [2300]	Speed: 586.28 samples/sec	acc=0.295020
+[2018-05-11 00:33:12]  INFO:root:Epoch[0] Batch [2320]	Speed: 583.02 samples/sec	acc=0.301660
+[2018-05-11 00:33:29]  INFO:root:Epoch[0] Batch [2340]	Speed: 584.87 samples/sec	acc=0.304004
+[2018-05-11 00:33:47]  INFO:root:Epoch[0] Batch [2360]	Speed: 579.78 samples/sec	acc=0.299512
+[2018-05-11 00:34:25]  INFO:root:Epoch[0] Batch [2380]	Speed: 270.86 samples/sec	acc=0.300879
+[2018-05-11 00:35:03]  INFO:root:Epoch[0] Batch [2400]	Speed: 269.47 samples/sec	acc=0.309863
+[2018-05-11 00:35:50]  INFO:root:Epoch[0] Batch [2420]	Speed: 216.54 samples/sec	acc=0.311035
+[2018-05-11 00:36:18]  INFO:root:Epoch[0] Batch [2440]	Speed: 362.88 samples/sec	acc=0.298047
+[2018-05-11 00:36:36]  INFO:root:Epoch[0] Batch [2460]	Speed: 582.84 samples/sec	acc=0.306543
+[2018-05-11 00:36:53]  INFO:root:Epoch[0] Batch [2480]	Speed: 585.18 samples/sec	acc=0.306348
+[2018-05-11 00:37:11]  INFO:root:Epoch[0] Batch [2500]	Speed: 583.92 samples/sec	acc=0.303223
+[2018-05-11 00:37:28]  INFO:root:Epoch[0] Batch [2520]	Speed: 585.15 samples/sec	acc=0.302344
+[2018-05-11 00:37:46]  INFO:root:Epoch[0] Batch [2540]	Speed: 585.99 samples/sec	acc=0.299121
+[2018-05-11 00:38:03]  INFO:root:Epoch[0] Batch [2560]	Speed: 586.25 samples/sec	acc=0.302051
+[2018-05-11 00:38:21]  INFO:root:Epoch[0] Batch [2580]	Speed: 581.26 samples/sec	acc=0.296973
+[2018-05-11 00:38:39]  INFO:root:Epoch[0] Batch [2600]	Speed: 580.52 samples/sec	acc=0.308398
+[2018-05-11 00:38:56]  INFO:root:Epoch[0] Batch [2620]	Speed: 584.21 samples/sec	acc=0.295898
+[2018-05-11 00:39:14]  INFO:root:Epoch[0] Batch [2640]	Speed: 586.21 samples/sec	acc=0.301953
+[2018-05-11 00:39:31]  INFO:root:Epoch[0] Batch [2660]	Speed: 585.85 samples/sec	acc=0.295703
+[2018-05-11 00:39:55]  INFO:root:Epoch[0] Batch [2680]	Speed: 424.91 samples/sec	acc=0.309082
+[2018-05-11 00:40:40]  INFO:root:Epoch[0] Batch [2700]	Speed: 228.05 samples/sec	acc=0.290137
+[2018-05-11 00:41:19]  INFO:root:Epoch[0] Batch [2720]	Speed: 264.63 samples/sec	acc=0.298145
+[2018-05-11 00:42:01]  INFO:root:Epoch[0] Batch [2740]	Speed: 243.01 samples/sec	acc=0.303223
+[2018-05-11 00:42:42]  INFO:root:Epoch[0] Batch [2760]	Speed: 247.61 samples/sec	acc=0.301074
+[2018-05-11 00:43:19]  INFO:root:Epoch[0] Batch [2780]	Speed: 277.53 samples/sec	acc=0.301563
+[2018-05-11 00:43:58]  INFO:root:Epoch[0] Batch [2800]	Speed: 263.59 samples/sec	acc=0.299805
+[2018-05-11 00:44:16]  INFO:root:Epoch[0] Batch [2820]	Speed: 586.40 samples/sec	acc=0.302148
+[2018-05-11 00:44:33]  INFO:root:Epoch[0] Batch [2840]	Speed: 586.23 samples/sec	acc=0.292969
+[2018-05-11 00:44:51]  INFO:root:Epoch[0] Batch [2860]	Speed: 583.39 samples/sec	acc=0.305273
+[2018-05-11 00:45:08]  INFO:root:Epoch[0] Batch [2880]	Speed: 584.81 samples/sec	acc=0.298926
+[2018-05-11 00:45:26]  INFO:root:Epoch[0] Batch [2900]	Speed: 583.69 samples/sec	acc=0.298438
+[2018-05-11 00:45:43]  INFO:root:Epoch[0] Batch [2920]	Speed: 583.92 samples/sec	acc=0.298535
+[2018-05-11 00:46:01]  INFO:root:Epoch[0] Batch [2940]	Speed: 583.93 samples/sec	acc=0.296777
+[2018-05-11 00:46:18]  INFO:root:Epoch[0] Batch [2960]	Speed: 583.88 samples/sec	acc=0.307520
+[2018-05-11 00:46:36]  INFO:root:Epoch[0] Batch [2980]	Speed: 585.22 samples/sec	acc=0.307422
+[2018-05-11 00:46:52]  lr-batch-epoch: 0.1 2999 0
+[2018-05-11 00:46:53]  INFO:root:Epoch[0] Batch [3000]	Speed: 584.27 samples/sec	acc=0.299414
+[2018-05-11 00:47:11]  INFO:root:Epoch[0] Batch [3020]	Speed: 585.12 samples/sec	acc=0.294238
+[2018-05-11 00:47:28]  INFO:root:Epoch[0] Batch [3040]	Speed: 584.55 samples/sec	acc=0.303223
+[2018-05-11 00:47:46]  INFO:root:Epoch[0] Batch [3060]	Speed: 581.92 samples/sec	acc=0.301563
+[2018-05-11 00:48:04]  INFO:root:Epoch[0] Batch [3080]	Speed: 580.21 samples/sec	acc=0.301758
+[2018-05-11 00:48:21]  INFO:root:Epoch[0] Batch [3100]	Speed: 583.40 samples/sec	acc=0.294824
+[2018-05-11 00:48:38]  INFO:root:Epoch[0] Batch [3120]	Speed: 588.00 samples/sec	acc=0.297363
+[2018-05-11 00:48:56]  INFO:root:Epoch[0] Batch [3140]	Speed: 586.23 samples/sec	acc=0.304102
+[2018-05-11 00:49:14]  INFO:root:Epoch[0] Batch [3160]	Speed: 582.16 samples/sec	acc=0.298145
+[2018-05-11 00:49:31]  INFO:root:Epoch[0] Batch [3180]	Speed: 583.26 samples/sec	acc=0.301367
+[2018-05-11 00:49:49]  INFO:root:Epoch[0] Batch [3200]	Speed: 585.02 samples/sec	acc=0.296484
+[2018-05-11 00:50:06]  INFO:root:Epoch[0] Batch [3220]	Speed: 583.35 samples/sec	acc=0.301270
+[2018-05-11 00:50:24]  INFO:root:Epoch[0] Batch [3240]	Speed: 584.40 samples/sec	acc=0.301074
+[2018-05-11 00:50:41]  INFO:root:Epoch[0] Batch [3260]	Speed: 584.05 samples/sec	acc=0.294824
+[2018-05-11 00:50:59]  INFO:root:Epoch[0] Batch [3280]	Speed: 586.00 samples/sec	acc=0.299316
+[2018-05-11 00:51:16]  INFO:root:Epoch[0] Batch [3300]	Speed: 583.70 samples/sec	acc=0.304590
+[2018-05-11 00:51:34]  INFO:root:Epoch[0] Batch [3320]	Speed: 586.20 samples/sec	acc=0.302344
+[2018-05-11 00:51:51]  INFO:root:Epoch[0] Batch [3340]	Speed: 585.12 samples/sec	acc=0.300781
+[2018-05-11 00:52:09]  INFO:root:Epoch[0] Batch [3360]	Speed: 583.43 samples/sec	acc=0.296875
+[2018-05-11 00:52:26]  INFO:root:Epoch[0] Batch [3380]	Speed: 580.81 samples/sec	acc=0.306641
+[2018-05-11 00:52:44]  INFO:root:Epoch[0] Batch [3400]	Speed: 583.89 samples/sec	acc=0.290137
+[2018-05-11 00:53:01]  INFO:root:Epoch[0] Batch [3420]	Speed: 585.36 samples/sec	acc=0.299707
+[2018-05-11 00:53:19]  INFO:root:Epoch[0] Batch [3440]	Speed: 586.35 samples/sec	acc=0.297754
+[2018-05-11 00:53:36]  INFO:root:Epoch[0] Batch [3460]	Speed: 585.83 samples/sec	acc=0.306250
+[2018-05-11 00:53:54]  INFO:root:Epoch[0] Batch [3480]	Speed: 583.50 samples/sec	acc=0.300391
+[2018-05-11 00:54:20]  INFO:root:Epoch[0] Batch [3500]	Speed: 399.51 samples/sec	acc=0.296289
+[2018-05-11 00:55:10]  INFO:root:Epoch[0] Batch [3520]	Speed: 202.53 samples/sec	acc=0.305273
+[2018-05-11 00:55:53]  INFO:root:Epoch[0] Batch [3540]	Speed: 239.26 samples/sec	acc=0.301074
+[2018-05-11 00:56:10]  INFO:root:Epoch[0] Batch [3560]	Speed: 607.70 samples/sec	acc=0.302441
+[2018-05-11 00:56:27]  INFO:root:Epoch[0] Batch [3580]	Speed: 584.08 samples/sec	acc=0.301953
+[2018-05-11 00:56:45]  INFO:root:Epoch[0] Batch [3600]	Speed: 581.67 samples/sec	acc=0.296191
+[2018-05-11 00:57:02]  INFO:root:Epoch[0] Batch [3620]	Speed: 583.34 samples/sec	acc=0.301172
+[2018-05-11 00:57:20]  INFO:root:Epoch[0] Batch [3640]	Speed: 587.88 samples/sec	acc=0.298047
+[2018-05-11 00:57:37]  INFO:root:Epoch[0] Batch [3660]	Speed: 584.25 samples/sec	acc=0.304980
+[2018-05-11 00:57:55]  INFO:root:Epoch[0] Batch [3680]	Speed: 583.70 samples/sec	acc=0.311914
+[2018-05-11 00:58:13]  INFO:root:Epoch[0] Batch [3700]	Speed: 578.47 samples/sec	acc=0.297852
+[2018-05-11 00:58:30]  INFO:root:Epoch[0] Batch [3720]	Speed: 578.95 samples/sec	acc=0.308496
+[2018-05-11 00:58:48]  INFO:root:Epoch[0] Batch [3740]	Speed: 585.55 samples/sec	acc=0.296094
+[2018-05-11 00:59:05]  INFO:root:Epoch[0] Batch [3760]	Speed: 583.51 samples/sec	acc=0.303223
+[2018-05-11 00:59:23]  INFO:root:Epoch[0] Batch [3780]	Speed: 584.06 samples/sec	acc=0.302344
+[2018-05-11 00:59:40]  INFO:root:Epoch[0] Batch [3800]	Speed: 585.58 samples/sec	acc=0.305859
+[2018-05-11 00:59:58]  INFO:root:Epoch[0] Batch [3820]	Speed: 584.16 samples/sec	acc=0.295898
+[2018-05-11 01:00:15]  INFO:root:Epoch[0] Batch [3840]	Speed: 583.71 samples/sec	acc=0.306055
+[2018-05-11 01:00:33]  INFO:root:Epoch[0] Batch [3860]	Speed: 579.11 samples/sec	acc=0.298145
+[2018-05-11 01:00:51]  INFO:root:Epoch[0] Batch [3880]	Speed: 584.13 samples/sec	acc=0.297949
+[2018-05-11 01:01:08]  INFO:root:Epoch[0] Batch [3900]	Speed: 584.27 samples/sec	acc=0.301953
+[2018-05-11 01:01:26]  INFO:root:Epoch[0] Batch [3920]	Speed: 583.84 samples/sec	acc=0.296191
+[2018-05-11 01:01:43]  INFO:root:Epoch[0] Batch [3940]	Speed: 584.33 samples/sec	acc=0.291113
+[2018-05-11 01:02:01]  INFO:root:Epoch[0] Batch [3960]	Speed: 584.68 samples/sec	acc=0.300391
+[2018-05-11 01:02:18]  INFO:root:Epoch[0] Batch [3980]	Speed: 579.07 samples/sec	acc=0.292090
+[2018-05-11 01:02:35]  lr-batch-epoch: 0.1 3999 0
+[2018-05-11 01:02:35]  testing verification..
+[2018-05-11 01:02:58]  (12000, 128)
+[2018-05-11 01:02:58]  infer time 22.395612
+[2018-05-11 01:03:02]  [lfw][4000]XNorm: 10.998606
+[2018-05-11 01:03:02]  [lfw][4000]Accuracy-Flip: 0.99333+-0.00548
+[2018-05-11 01:03:02]  testing verification..
+[2018-05-11 01:03:28]  (14000, 128)
+[2018-05-11 01:03:28]  infer time 25.338297
+[2018-05-11 01:03:32]  [cfp_fp][4000]XNorm: 8.909572
+[2018-05-11 01:03:32]  [cfp_fp][4000]Accuracy-Flip: 0.86814+-0.01525
+[2018-05-11 01:03:33]  testing verification..
+[2018-05-11 01:03:54]  (12000, 128)
+[2018-05-11 01:03:54]  infer time 21.07471
+[2018-05-11 01:03:58]  [agedb_30][4000]XNorm: 10.971263
+[2018-05-11 01:03:58]  [agedb_30][4000]Accuracy-Flip: 0.94883+-0.01150
+[2018-05-11 01:03:58]  saving 2
+[2018-05-11 01:03:59]  INFO:root:Saved checkpoint to "/data/output/model-y1-arcface-0002.params"
+[2018-05-11 01:03:59]  [4000]Accuracy-Highest: 0.94883
+[2018-05-11 01:03:59]  INFO:root:Epoch[0] Batch [4000]	Speed: 101.61 samples/sec	acc=0.300781
+[2018-05-11 01:04:16]  INFO:root:Epoch[0] Batch [4020]	Speed: 598.81 samples/sec	acc=0.296582
+[2018-05-11 01:04:36]  INFO:root:Epoch[0] Batch [4040]	Speed: 528.73 samples/sec	acc=0.299219
+[2018-05-11 01:05:23]  INFO:root:Epoch[0] Batch [4060]	Speed: 216.70 samples/sec	acc=0.306738
+[2018-05-11 01:06:04]  INFO:root:Epoch[0] Batch [4080]	Speed: 248.30 samples/sec	acc=0.304102
+[2018-05-11 01:06:54]  INFO:root:Epoch[0] Batch [4100]	Speed: 206.89 samples/sec	acc=0.298926
+[2018-05-11 01:07:11]  INFO:root:Epoch[0] Batch [4120]	Speed: 585.27 samples/sec	acc=0.300000
+[2018-05-11 01:07:29]  INFO:root:Epoch[0] Batch [4140]	Speed: 586.01 samples/sec	acc=0.299902
+[2018-05-11 01:07:46]  INFO:root:Epoch[0] Batch [4160]	Speed: 584.39 samples/sec	acc=0.306836
+[2018-05-11 01:08:04]  INFO:root:Epoch[0] Batch [4180]	Speed: 584.48 samples/sec	acc=0.293164
+[2018-05-11 01:08:21]  INFO:root:Epoch[0] Batch [4200]	Speed: 584.49 samples/sec	acc=0.301465
+[2018-05-11 01:08:39]  INFO:root:Epoch[0] Batch [4220]	Speed: 585.22 samples/sec	acc=0.299414
+[2018-05-11 01:08:56]  INFO:root:Epoch[0] Batch [4240]	Speed: 581.28 samples/sec	acc=0.292578
+[2018-05-11 01:09:14]  INFO:root:Epoch[0] Batch [4260]	Speed: 583.71 samples/sec	acc=0.300586
+[2018-05-11 01:09:31]  INFO:root:Epoch[0] Batch [4280]	Speed: 585.31 samples/sec	acc=0.305664
+[2018-05-11 01:09:49]  INFO:root:Epoch[0] Batch [4300]	Speed: 583.04 samples/sec	acc=0.294141
+[2018-05-11 01:10:06]  INFO:root:Epoch[0] Batch [4320]	Speed: 584.57 samples/sec	acc=0.303809
+[2018-05-11 01:10:24]  INFO:root:Epoch[0] Batch [4340]	Speed: 579.59 samples/sec	acc=0.301855
+[2018-05-11 01:10:55]  INFO:root:Epoch[0] Batch [4360]	Speed: 329.66 samples/sec	acc=0.294434
+[2018-05-11 01:11:46]  INFO:root:Epoch[0] Batch [4380]	Speed: 200.86 samples/sec	acc=0.301855
+[2018-05-11 01:12:36]  INFO:root:Epoch[0] Batch [4400]	Speed: 204.26 samples/sec	acc=0.300781
+[2018-05-11 01:13:25]  INFO:root:Epoch[0] Batch [4420]	Speed: 209.78 samples/sec	acc=0.299707
+[2018-05-11 01:14:13]  INFO:root:Epoch[0] Batch [4440]	Speed: 215.18 samples/sec	acc=0.293066
+[2018-05-11 01:15:02]  INFO:root:Epoch[0] Batch [4460]	Speed: 209.57 samples/sec	acc=0.301660
+[2018-05-11 01:15:42]  INFO:root:Epoch[0] Batch [4480]	Speed: 250.98 samples/sec	acc=0.296094
+[2018-05-11 01:16:26]  INFO:root:Epoch[0] Batch [4500]	Speed: 233.88 samples/sec	acc=0.301270
+[2018-05-11 01:16:44]  INFO:root:Epoch[0] Batch [4520]	Speed: 581.88 samples/sec	acc=0.308496
+[2018-05-11 01:17:01]  INFO:root:Epoch[0] Batch [4540]	Speed: 583.29 samples/sec	acc=0.301465
+[2018-05-11 01:17:19]  INFO:root:Epoch[0] Batch [4560]	Speed: 584.26 samples/sec	acc=0.290039
+[2018-05-11 01:17:36]  INFO:root:Epoch[0] Batch [4580]	Speed: 586.26 samples/sec	acc=0.295215
+[2018-05-11 01:17:54]  INFO:root:Epoch[0] Batch [4600]	Speed: 586.62 samples/sec	acc=0.295996
+[2018-05-11 01:18:11]  INFO:root:Epoch[0] Batch [4620]	Speed: 586.09 samples/sec	acc=0.305176
+[2018-05-11 01:18:29]  INFO:root:Epoch[0] Batch [4640]	Speed: 587.61 samples/sec	acc=0.298730
+[2018-05-11 01:18:46]  INFO:root:Epoch[0] Batch [4660]	Speed: 587.96 samples/sec	acc=0.299805
+[2018-05-11 01:19:04]  INFO:root:Epoch[0] Batch [4680]	Speed: 588.13 samples/sec	acc=0.304004
+[2018-05-11 01:19:21]  INFO:root:Epoch[0] Batch [4700]	Speed: 585.62 samples/sec	acc=0.302148
+[2018-05-11 01:19:39]  INFO:root:Epoch[0] Batch [4720]	Speed: 582.95 samples/sec	acc=0.294629
+[2018-05-11 01:20:00]  INFO:root:Epoch[0] Batch [4740]	Speed: 471.10 samples/sec	acc=0.295996
+[2018-05-11 01:20:52]  INFO:root:Epoch[0] Batch [4760]	Speed: 199.38 samples/sec	acc=0.297168
+[2018-05-11 01:21:41]  INFO:root:Epoch[0] Batch [4780]	Speed: 205.93 samples/sec	acc=0.305664
+[2018-05-11 01:22:10]  INFO:root:Epoch[0] Batch [4800]	Speed: 363.63 samples/sec	acc=0.306738
+[2018-05-11 01:22:27]  INFO:root:Epoch[0] Batch [4820]	Speed: 583.89 samples/sec	acc=0.294434
+[2018-05-11 01:22:45]  INFO:root:Epoch[0] Batch [4840]	Speed: 584.53 samples/sec	acc=0.299219
+[2018-05-11 01:23:02]  INFO:root:Epoch[0] Batch [4860]	Speed: 588.11 samples/sec	acc=0.303516
+[2018-05-11 01:23:20]  INFO:root:Epoch[0] Batch [4880]	Speed: 584.41 samples/sec	acc=0.294629
+[2018-05-11 01:23:37]  INFO:root:Epoch[0] Batch [4900]	Speed: 586.93 samples/sec	acc=0.302344
+[2018-05-11 01:23:55]  INFO:root:Epoch[0] Batch [4920]	Speed: 584.64 samples/sec	acc=0.293164
+[2018-05-11 01:24:12]  INFO:root:Epoch[0] Batch [4940]	Speed: 584.74 samples/sec	acc=0.291895
+[2018-05-11 01:24:30]  INFO:root:Epoch[0] Batch [4960]	Speed: 584.94 samples/sec	acc=0.304199
+[2018-05-11 01:24:47]  INFO:root:Epoch[0] Batch [4980]	Speed: 584.80 samples/sec	acc=0.299805
+[2018-05-11 01:25:04]  lr-batch-epoch: 0.1 4999 0
+[2018-05-11 01:25:05]  INFO:root:Epoch[0] Batch [5000]	Speed: 586.26 samples/sec	acc=0.297266
+[2018-05-11 01:25:22]  INFO:root:Epoch[0] Batch [5020]	Speed: 580.85 samples/sec	acc=0.295898
+[2018-05-11 01:25:40]  INFO:root:Epoch[0] Batch [5040]	Speed: 584.20 samples/sec	acc=0.299414
+[2018-05-11 01:25:57]  INFO:root:Epoch[0] Batch [5060]	Speed: 584.58 samples/sec	acc=0.296191
+[2018-05-11 01:26:15]  INFO:root:Epoch[0] Batch [5080]	Speed: 581.64 samples/sec	acc=0.300000
+[2018-05-11 01:26:32]  INFO:root:Epoch[0] Batch [5100]	Speed: 582.75 samples/sec	acc=0.298828
+[2018-05-11 01:26:50]  INFO:root:Epoch[0] Batch [5120]	Speed: 583.56 samples/sec	acc=0.298535
+[2018-05-11 01:27:08]  INFO:root:Epoch[0] Batch [5140]	Speed: 578.13 samples/sec	acc=0.296973
+[2018-05-11 01:27:25]  INFO:root:Epoch[0] Batch [5160]	Speed: 585.27 samples/sec	acc=0.300098
+[2018-05-11 01:27:43]  INFO:root:Epoch[0] Batch [5180]	Speed: 584.25 samples/sec	acc=0.311523
+[2018-05-11 01:28:00]  INFO:root:Epoch[0] Batch [5200]	Speed: 585.66 samples/sec	acc=0.307520
+[2018-05-11 01:28:23]  INFO:root:Epoch[0] Batch [5220]	Speed: 456.49 samples/sec	acc=0.302539
+[2018-05-11 01:28:40]  INFO:root:Epoch[0] Batch [5240]	Speed: 582.76 samples/sec	acc=0.290430
+[2018-05-11 01:28:58]  INFO:root:Epoch[0] Batch [5260]	Speed: 583.72 samples/sec	acc=0.293652
+[2018-05-11 01:29:15]  INFO:root:Epoch[0] Batch [5280]	Speed: 583.12 samples/sec	acc=0.302734
+[2018-05-11 01:29:33]  INFO:root:Epoch[0] Batch [5300]	Speed: 585.75 samples/sec	acc=0.300586
+[2018-05-11 01:29:50]  INFO:root:Epoch[0] Batch [5320]	Speed: 584.20 samples/sec	acc=0.294727
+[2018-05-11 01:30:08]  INFO:root:Epoch[0] Batch [5340]	Speed: 583.33 samples/sec	acc=0.300391
+[2018-05-11 01:30:25]  INFO:root:Epoch[0] Batch [5360]	Speed: 581.64 samples/sec	acc=0.305664
+[2018-05-11 01:30:43]  INFO:root:Epoch[0] Batch [5380]	Speed: 585.72 samples/sec	acc=0.305957
+[2018-05-11 01:31:00]  INFO:root:Epoch[0] Batch [5400]	Speed: 583.11 samples/sec	acc=0.299316
+[2018-05-11 01:31:18]  INFO:root:Epoch[0] Batch [5420]	Speed: 581.62 samples/sec	acc=0.295703
+[2018-05-11 01:31:36]  INFO:root:Epoch[0] Batch [5440]	Speed: 582.52 samples/sec	acc=0.293457
+[2018-05-11 01:31:53]  INFO:root:Epoch[0] Batch [5460]	Speed: 577.66 samples/sec	acc=0.301074
+[2018-05-11 01:32:11]  INFO:root:Epoch[0] Batch [5480]	Speed: 584.16 samples/sec	acc=0.298828
+[2018-05-11 01:32:28]  INFO:root:Epoch[0] Batch [5500]	Speed: 585.41 samples/sec	acc=0.298730
+[2018-05-11 01:32:46]  INFO:root:Epoch[0] Batch [5520]	Speed: 585.95 samples/sec	acc=0.296582
+[2018-05-11 01:33:03]  INFO:root:Epoch[0] Batch [5540]	Speed: 586.71 samples/sec	acc=0.302539
+[2018-05-11 01:33:21]  INFO:root:Epoch[0] Batch [5560]	Speed: 582.34 samples/sec	acc=0.293848
+[2018-05-11 01:33:38]  INFO:root:Epoch[0] Batch [5580]	Speed: 584.37 samples/sec	acc=0.294238
+[2018-05-11 01:33:56]  INFO:root:Epoch[0] Batch [5600]	Speed: 585.48 samples/sec	acc=0.295020
+[2018-05-11 01:34:13]  INFO:root:Epoch[0] Batch [5620]	Speed: 584.40 samples/sec	acc=0.300586
+[2018-05-11 01:34:44]  INFO:root:Epoch[0] Batch [5640]	Speed: 330.32 samples/sec	acc=0.298730
+[2018-05-11 01:35:34]  INFO:root:Epoch[0] Batch [5660]	Speed: 208.48 samples/sec	acc=0.295508
+[2018-05-11 01:36:30]  INFO:root:Epoch[0] Batch [5680]	Speed: 180.74 samples/sec	acc=0.298926
+[2018-05-11 01:37:17]  INFO:root:Epoch[0] Batch [5700]	Speed: 220.38 samples/sec	acc=0.296289
+[2018-05-11 01:38:05]  INFO:root:Epoch[0] Batch [5720]	Speed: 212.55 samples/sec	acc=0.301660
+[2018-05-11 01:38:39]  INFO:root:Epoch[0] Batch [5740]	Speed: 301.72 samples/sec	acc=0.305273
+[2018-05-11 01:38:56]  INFO:root:Epoch[0] Batch [5760]	Speed: 586.76 samples/sec	acc=0.304785
+[2018-05-11 01:39:14]  INFO:root:Epoch[0] Batch [5780]	Speed: 586.08 samples/sec	acc=0.301758
+[2018-05-11 01:39:31]  INFO:root:Epoch[0] Batch [5800]	Speed: 583.24 samples/sec	acc=0.304395
+[2018-05-11 01:39:49]  INFO:root:Epoch[0] Batch [5820]	Speed: 585.50 samples/sec	acc=0.300098
+[2018-05-11 01:40:06]  INFO:root:Epoch[0] Batch [5840]	Speed: 584.95 samples/sec	acc=0.309277
+[2018-05-11 01:40:24]  INFO:root:Epoch[0] Batch [5860]	Speed: 586.48 samples/sec	acc=0.299902
+[2018-05-11 01:40:41]  INFO:root:Epoch[0] Batch [5880]	Speed: 579.74 samples/sec	acc=0.312402
+[2018-05-11 01:40:59]  INFO:root:Epoch[0] Batch [5900]	Speed: 586.26 samples/sec	acc=0.301270
+[2018-05-11 01:41:17]  INFO:root:Epoch[0] Batch [5920]	Speed: 578.88 samples/sec	acc=0.300195
+[2018-05-11 01:41:34]  INFO:root:Epoch[0] Batch [5940]	Speed: 586.51 samples/sec	acc=0.303320
+[2018-05-11 01:41:52]  INFO:root:Epoch[0] Batch [5960]	Speed: 586.11 samples/sec	acc=0.305957
+[2018-05-11 01:42:14]  INFO:root:Epoch[0] Batch [5980]	Speed: 449.39 samples/sec	acc=0.299121
+[2018-05-11 01:43:12]  lr-batch-epoch: 0.1 5999 0
+[2018-05-11 01:43:12]  testing verification..
+[2018-05-11 01:45:00]  (12000, 128)
+[2018-05-11 01:45:00]  infer time 106.554728
+[2018-05-11 01:45:04]  [lfw][6000]XNorm: 10.973133
+[2018-05-11 01:45:04]  [lfw][6000]Accuracy-Flip: 0.99183+-0.00418
+[2018-05-11 01:45:04]  testing verification..
+[2018-05-11 01:47:22]  (14000, 128)
+[2018-05-11 01:47:22]  infer time 136.355804
+[2018-05-11 01:47:26]  [cfp_fp][6000]XNorm: 8.900037
+[2018-05-11 01:47:26]  [cfp_fp][6000]Accuracy-Flip: 0.87029+-0.01589
+[2018-05-11 01:47:26]  testing verification..
+[2018-05-11 01:49:03]  (12000, 128)
+[2018-05-11 01:49:03]  infer time 97.031107
+[2018-05-11 01:49:07]  [agedb_30][6000]XNorm: 10.747036
+[2018-05-11 01:49:07]  [agedb_30][6000]Accuracy-Flip: 0.94800+-0.01077
+[2018-05-11 01:49:07]  saving 3
+[2018-05-11 01:49:08]  [6000]Accuracy-Highest: 0.94883
+[2018-05-11 01:49:08]  INFO:root:Saved checkpoint to "/data/output/model-y1-arcface-0003.params"
+[2018-05-11 01:49:11]  INFO:root:Epoch[0] Batch [6000]	Speed: 24.59 samples/sec	acc=0.300977
+[2018-05-11 01:50:04]  INFO:root:Epoch[0] Batch [6020]	Speed: 193.98 samples/sec	acc=0.309863
+[2018-05-11 01:50:51]  INFO:root:Epoch[0] Batch [6040]	Speed: 214.22 samples/sec	acc=0.301855
+[2018-05-11 01:51:44]  INFO:root:Epoch[0] Batch [6060]	Speed: 193.87 samples/sec	acc=0.297754
+[2018-05-11 01:52:37]  INFO:root:Epoch[0] Batch [6080]	Speed: 195.20 samples/sec	acc=0.294531
+[2018-05-11 01:53:31]  INFO:root:Epoch[0] Batch [6100]	Speed: 187.94 samples/sec	acc=0.311133
+[2018-05-11 01:54:16]  INFO:root:Epoch[0] Batch [6120]	Speed: 226.17 samples/sec	acc=0.299512
+[2018-05-11 01:55:06]  INFO:root:Epoch[0] Batch [6140]	Speed: 204.78 samples/sec	acc=0.293066
+[2018-05-11 01:56:06]  INFO:root:Epoch[0] Batch [6160]	Speed: 172.53 samples/sec	acc=0.305664
+[2018-05-11 01:57:00]  INFO:root:Epoch[0] Batch [6180]	Speed: 188.15 samples/sec	acc=0.304102
+[2018-05-11 01:57:54]  INFO:root:Epoch[0] Batch [6200]	Speed: 190.31 samples/sec	acc=0.297559
+[2018-05-11 01:58:44]  INFO:root:Epoch[0] Batch [6220]	Speed: 205.46 samples/sec	acc=0.293652
+[2018-05-11 01:59:41]  INFO:root:Epoch[0] Batch [6240]	Speed: 178.66 samples/sec	acc=0.303711
+[2018-05-11 02:00:35]  INFO:root:Epoch[0] Batch [6260]	Speed: 188.81 samples/sec	acc=0.297852
+[2018-05-11 02:01:25]  INFO:root:Epoch[0] Batch [6280]	Speed: 207.52 samples/sec	acc=0.308887
+[2018-05-11 02:02:16]  INFO:root:Epoch[0] Batch [6300]	Speed: 200.79 samples/sec	acc=0.298926
+[2018-05-11 02:03:10]  INFO:root:Epoch[0] Batch [6320]	Speed: 189.41 samples/sec	acc=0.301074
+[2018-05-11 02:04:02]  INFO:root:Epoch[0] Batch [6340]	Speed: 195.44 samples/sec	acc=0.306641
+[2018-05-11 02:04:57]  INFO:root:Epoch[0] Batch [6360]	Speed: 185.67 samples/sec	acc=0.299121
+[2018-05-11 02:05:48]  INFO:root:Epoch[0] Batch [6380]	Speed: 200.88 samples/sec	acc=0.309668
+[2018-05-11 02:06:40]  INFO:root:Epoch[0] Batch [6400]	Speed: 197.78 samples/sec	acc=0.305176
+[2018-05-11 02:07:37]  INFO:root:Epoch[0] Batch [6420]	Speed: 178.88 samples/sec	acc=0.302539
+[2018-05-11 02:08:28]  INFO:root:Epoch[0] Batch [6440]	Speed: 203.39 samples/sec	acc=0.293750
+[2018-05-11 02:09:18]  INFO:root:Epoch[0] Batch [6460]	Speed: 203.62 samples/sec	acc=0.306445
+[2018-05-11 02:10:17]  INFO:root:Epoch[0] Batch [6480]	Speed: 173.04 samples/sec	acc=0.297168
+[2018-05-11 02:11:13]  INFO:root:Epoch[0] Batch [6500]	Speed: 184.16 samples/sec	acc=0.305176
+[2018-05-11 02:12:05]  INFO:root:Epoch[0] Batch [6520]	Speed: 194.88 samples/sec	acc=0.310059
+[2018-05-11 02:12:52]  INFO:root:Epoch[0] Batch [6540]	Speed: 217.79 samples/sec	acc=0.295605
+[2018-05-11 02:13:32]  INFO:root:Epoch[0] Batch [6560]	Speed: 257.94 samples/sec	acc=0.306152
+[2018-05-11 02:13:50]  INFO:root:Epoch[0] Batch [6580]	Speed: 582.58 samples/sec	acc=0.304102
+[2018-05-11 02:14:07]  INFO:root:Epoch[0] Batch [6600]	Speed: 586.36 samples/sec	acc=0.295703
+[2018-05-11 02:14:25]  INFO:root:Epoch[0] Batch [6620]	Speed: 585.68 samples/sec	acc=0.292676
+[2018-05-11 02:14:42]  INFO:root:Epoch[0] Batch [6640]	Speed: 585.37 samples/sec	acc=0.292773
+[2018-05-11 02:15:00]  INFO:root:Epoch[0] Batch [6660]	Speed: 585.16 samples/sec	acc=0.290820
+[2018-05-11 02:15:17]  INFO:root:Epoch[0] Batch [6680]	Speed: 585.65 samples/sec	acc=0.297559
+[2018-05-11 02:15:34]  INFO:root:Epoch[0] Batch [6700]	Speed: 588.33 samples/sec	acc=0.304883
+[2018-05-11 02:15:52]  INFO:root:Epoch[0] Batch [6720]	Speed: 586.78 samples/sec	acc=0.302051
+[2018-05-11 02:16:09]  INFO:root:Epoch[0] Batch [6740]	Speed: 585.90 samples/sec	acc=0.301758
+[2018-05-11 02:16:27]  INFO:root:Epoch[0] Batch [6760]	Speed: 583.89 samples/sec	acc=0.300195
+[2018-05-11 02:16:44]  INFO:root:Epoch[0] Batch [6780]	Speed: 585.63 samples/sec	acc=0.306934
+[2018-05-11 02:17:02]  INFO:root:Epoch[0] Batch [6800]	Speed: 585.33 samples/sec	acc=0.296777
+[2018-05-11 02:17:36]  INFO:root:Epoch[0] Batch [6820]	Speed: 296.62 samples/sec	acc=0.299316
+[2018-05-11 02:18:28]  INFO:root:Epoch[0] Batch [6840]	Speed: 197.34 samples/sec	acc=0.302930
+[2018-05-11 02:19:27]  INFO:root:Epoch[0] Batch [6860]	Speed: 174.51 samples/sec	acc=0.304102
+[2018-05-11 02:20:20]  INFO:root:Epoch[0] Batch [6880]	Speed: 194.72 samples/sec	acc=0.296680
+[2018-05-11 02:21:11]  INFO:root:Epoch[0] Batch [6900]	Speed: 200.53 samples/sec	acc=0.308594
+[2018-05-11 02:22:05]  INFO:root:Epoch[0] Batch [6920]	Speed: 188.75 samples/sec	acc=0.300293
+[2018-05-11 02:23:00]  INFO:root:Epoch[0] Batch [6940]	Speed: 184.22 samples/sec	acc=0.302539
+[2018-05-11 02:23:52]  INFO:root:Epoch[0] Batch [6960]	Speed: 199.40 samples/sec	acc=0.302148
+[2018-05-11 02:24:40]  INFO:root:Epoch[0] Batch [6980]	Speed: 211.13 samples/sec	acc=0.293945
+[2018-05-11 02:25:29]  lr-batch-epoch: 0.1 6999 0
+[2018-05-11 02:25:30]  INFO:root:Epoch[0] Batch [7000]	Speed: 206.36 samples/sec	acc=0.308691
+[2018-05-11 02:26:26]  INFO:root:Epoch[0] Batch [7020]	Speed: 183.94 samples/sec	acc=0.302832
+[2018-05-11 02:27:16]  INFO:root:Epoch[0] Batch [7040]	Speed: 203.82 samples/sec	acc=0.299023
+[2018-05-11 02:28:06]  INFO:root:Epoch[0] Batch [7060]	Speed: 202.95 samples/sec	acc=0.304785
+[2018-05-11 02:28:59]  INFO:root:Epoch[0] Batch [7080]	Speed: 192.97 samples/sec	acc=0.307422
+[2018-05-11 02:29:56]  INFO:root:Epoch[0] Batch [7100]	Speed: 180.93 samples/sec	acc=0.298926
+[2018-05-11 02:30:53]  INFO:root:Epoch[0] Batch [7120]	Speed: 179.44 samples/sec	acc=0.300098
+[2018-05-11 02:31:48]  INFO:root:Epoch[0] Batch [7140]	Speed: 186.05 samples/sec	acc=0.305469
+[2018-05-11 02:32:38]  INFO:root:Epoch[0] Batch [7160]	Speed: 205.12 samples/sec	acc=0.297754
+[2018-05-11 02:33:30]  INFO:root:Epoch[0] Batch [7180]	Speed: 197.63 samples/sec	acc=0.287500
+[2018-05-11 02:34:19]  INFO:root:Epoch[0] Batch [7200]	Speed: 206.72 samples/sec	acc=0.296289
+[2018-05-11 02:35:11]  INFO:root:Epoch[0] Batch [7220]	Speed: 200.02 samples/sec	acc=0.295312
+[2018-05-11 02:36:05]  INFO:root:Epoch[0] Batch [7240]	Speed: 189.15 samples/sec	acc=0.299609
+[2018-05-11 02:37:01]  INFO:root:Epoch[0] Batch [7260]	Speed: 181.31 samples/sec	acc=0.308301
+[2018-05-11 02:37:57]  INFO:root:Epoch[0] Batch [7280]	Speed: 183.03 samples/sec	acc=0.302051
+[2018-05-11 02:38:47]  INFO:root:Epoch[0] Batch [7300]	Speed: 206.83 samples/sec	acc=0.300684
+[2018-05-11 02:39:35]  INFO:root:Epoch[0] Batch [7320]	Speed: 210.36 samples/sec	acc=0.305957
+[2018-05-11 02:40:09]  INFO:root:Epoch[0] Batch [7340]	Speed: 306.35 samples/sec	acc=0.297852
+[2018-05-11 02:40:26]  INFO:root:Epoch[0] Batch [7360]	Speed: 584.59 samples/sec	acc=0.301855
+[2018-05-11 02:40:44]  INFO:root:Epoch[0] Batch [7380]	Speed: 584.02 samples/sec	acc=0.305371
+[2018-05-11 02:41:01]  INFO:root:Epoch[0] Batch [7400]	Speed: 581.08 samples/sec	acc=0.303516
+[2018-05-11 02:41:19]  INFO:root:Epoch[0] Batch [7420]	Speed: 587.76 samples/sec	acc=0.300684
+[2018-05-11 02:41:27]  INFO:root:Epoch[0] Train-acc=0.306836
+[2018-05-11 02:41:27]  INFO:root:Epoch[0] Time cost=9798.391
+[2018-05-11 02:41:28]  call reset()
+[2018-05-11 02:41:48]  INFO:root:Epoch[1] Batch [20]	Speed: 598.19 samples/sec	acc=0.329241
+[2018-05-11 02:42:06]  INFO:root:Epoch[1] Batch [40]	Speed: 586.15 samples/sec	acc=0.347656
+[2018-05-11 02:42:23]  INFO:root:Epoch[1] Batch [60]	Speed: 586.59 samples/sec	acc=0.348340
+[2018-05-11 02:42:41]  INFO:root:Epoch[1] Batch [80]	Speed: 587.54 samples/sec	acc=0.352051
+[2018-05-11 02:42:58]  INFO:root:Epoch[1] Batch [100]	Speed: 587.56 samples/sec	acc=0.346191
+[2018-05-11 02:43:16]  INFO:root:Epoch[1] Batch [120]	Speed: 585.10 samples/sec	acc=0.345410
+[2018-05-11 02:43:33]  INFO:root:Epoch[1] Batch [140]	Speed: 586.35 samples/sec	acc=0.345117
+[2018-05-11 02:43:51]  INFO:root:Epoch[1] Batch [160]	Speed: 589.39 samples/sec	acc=0.344727
+[2018-05-11 02:44:08]  INFO:root:Epoch[1] Batch [180]	Speed: 588.33 samples/sec	acc=0.344043
+[2018-05-11 02:45:03]  INFO:root:Epoch[1] Batch [200]	Speed: 187.60 samples/sec	acc=0.342969
+[2018-05-11 02:45:58]  INFO:root:Epoch[1] Batch [220]	Speed: 184.61 samples/sec	acc=0.344727
+[2018-05-11 02:46:52]  INFO:root:Epoch[1] Batch [240]	Speed: 191.02 samples/sec	acc=0.334277
+[2018-05-11 02:47:47]  INFO:root:Epoch[1] Batch [260]	Speed: 184.35 samples/sec	acc=0.334082
+[2018-05-11 02:48:45]  INFO:root:Epoch[1] Batch [280]	Speed: 176.09 samples/sec	acc=0.342187
+[2018-05-11 02:49:44]  INFO:root:Epoch[1] Batch [300]	Speed: 174.21 samples/sec	acc=0.331250
+[2018-05-11 02:50:39]  INFO:root:Epoch[1] Batch [320]	Speed: 186.40 samples/sec	acc=0.341895
+[2018-05-11 02:51:32]  INFO:root:Epoch[1] Batch [340]	Speed: 194.19 samples/sec	acc=0.338477
+[2018-05-11 02:52:28]  INFO:root:Epoch[1] Batch [360]	Speed: 181.76 samples/sec	acc=0.325391
+[2018-05-11 02:53:22]  INFO:root:Epoch[1] Batch [380]	Speed: 188.58 samples/sec	acc=0.331543
+[2018-05-11 02:54:18]  INFO:root:Epoch[1] Batch [400]	Speed: 185.75 samples/sec	acc=0.337305
+[2018-05-11 02:55:10]  INFO:root:Epoch[1] Batch [420]	Speed: 194.65 samples/sec	acc=0.328809
+[2018-05-11 02:56:05]  INFO:root:Epoch[1] Batch [440]	Speed: 185.65 samples/sec	acc=0.335449
+[2018-05-11 02:57:03]  INFO:root:Epoch[1] Batch [460]	Speed: 177.34 samples/sec	acc=0.317480
+[2018-05-11 02:58:01]  INFO:root:Epoch[1] Batch [480]	Speed: 176.05 samples/sec	acc=0.325195
+[2018-05-11 02:58:53]  INFO:root:Epoch[1] Batch [500]	Speed: 197.20 samples/sec	acc=0.334570
+[2018-05-11 02:59:50]  INFO:root:Epoch[1] Batch [520]	Speed: 180.12 samples/sec	acc=0.333398
+[2018-05-11 03:00:42]  INFO:root:Epoch[1] Batch [540]	Speed: 197.95 samples/sec	acc=0.329980
+[2018-05-11 03:01:37]  INFO:root:Epoch[1] Batch [560]	Speed: 185.00 samples/sec	acc=0.329199
+[2018-05-11 03:01:56]  lr-batch-epoch: 0.1 568 1
+[2018-05-11 03:01:56]  testing verification..
+[2018-05-11 03:04:03]  (12000, 128)
+[2018-05-11 03:04:03]  infer time 125.279173
+[2018-05-11 03:04:07]  [lfw][8000]XNorm: 11.138550
+[2018-05-11 03:04:07]  [lfw][8000]Accuracy-Flip: 0.99300+-0.00414
+[2018-05-11 03:04:07]  testing verification..
+[2018-05-11 03:06:36]  (14000, 128)
+[2018-05-11 03:06:36]  infer time 148.092129
+[2018-05-11 03:06:40]  [cfp_fp][8000]XNorm: 9.110234
+[2018-05-11 03:06:40]  [cfp_fp][8000]Accuracy-Flip: 0.87600+-0.01818
+[2018-05-11 03:06:40]  testing verification..
+[2018-05-11 03:08:38]  (12000, 128)
+[2018-05-11 03:08:38]  infer time 117.469431
+[2018-05-11 03:08:42]  [agedb_30][8000]XNorm: 11.029884
+[2018-05-11 03:08:42]  [agedb_30][8000]Accuracy-Flip: 0.94550+-0.00975
+[2018-05-11 03:08:42]  saving 4
+[2018-05-11 03:08:44]  INFO:root:Saved checkpoint to "/data/output/model-y1-arcface-0004.params"
+[2018-05-11 03:08:44]  [8000]Accuracy-Highest: 0.94883
+[2018-05-11 03:09:20]  INFO:root:Epoch[1] Batch [580]	Speed: 22.13 samples/sec	acc=0.329980
+[2018-05-11 03:10:12]  INFO:root:Epoch[1] Batch [600]	Speed: 197.72 samples/sec	acc=0.327051
+[2018-05-11 03:11:06]  INFO:root:Epoch[1] Batch [620]	Speed: 187.25 samples/sec	acc=0.324023
+[2018-05-11 03:12:05]  INFO:root:Epoch[1] Batch [640]	Speed: 175.42 samples/sec	acc=0.317871
+[2018-05-11 03:12:56]  INFO:root:Epoch[1] Batch [660]	Speed: 197.72 samples/sec	acc=0.315234
+[2018-05-11 03:13:52]  INFO:root:Epoch[1] Batch [680]	Speed: 183.02 samples/sec	acc=0.323730
+[2018-05-11 03:14:47]  INFO:root:Epoch[1] Batch [700]	Speed: 186.43 samples/sec	acc=0.323535
+[2018-05-11 03:15:45]  INFO:root:Epoch[1] Batch [720]	Speed: 176.57 samples/sec	acc=0.321191
+[2018-05-11 03:16:42]  INFO:root:Epoch[1] Batch [740]	Speed: 180.17 samples/sec	acc=0.321973
+[2018-05-11 03:17:38]  INFO:root:Epoch[1] Batch [760]	Speed: 184.18 samples/sec	acc=0.325000
+[2018-05-11 03:18:29]  INFO:root:Epoch[1] Batch [780]	Speed: 201.18 samples/sec	acc=0.310937
+[2018-05-11 03:19:24]  INFO:root:Epoch[1] Batch [800]	Speed: 184.38 samples/sec	acc=0.325098
+[2018-05-11 03:20:25]  INFO:root:Epoch[1] Batch [820]	Speed: 169.16 samples/sec	acc=0.327734
+[2018-05-11 03:21:25]  INFO:root:Epoch[1] Batch [840]	Speed: 170.67 samples/sec	acc=0.312793
+[2018-05-11 03:22:21]  INFO:root:Epoch[1] Batch [860]	Speed: 180.42 samples/sec	acc=0.320020
+[2018-05-11 03:23:19]  INFO:root:Epoch[1] Batch [880]	Speed: 177.09 samples/sec	acc=0.321289
+[2018-05-11 03:24:14]  INFO:root:Epoch[1] Batch [900]	Speed: 186.05 samples/sec	acc=0.320996
+[2018-05-11 03:25:03]  INFO:root:Epoch[1] Batch [920]	Speed: 211.65 samples/sec	acc=0.317969
+[2018-05-11 03:25:20]  INFO:root:Epoch[1] Batch [940]	Speed: 583.71 samples/sec	acc=0.320605
+[2018-05-11 03:25:38]  INFO:root:Epoch[1] Batch [960]	Speed: 583.92 samples/sec	acc=0.316602
+[2018-05-11 03:25:56]  INFO:root:Epoch[1] Batch [980]	Speed: 578.96 samples/sec	acc=0.312012
+[2018-05-11 03:26:13]  INFO:root:Epoch[1] Batch [1000]	Speed: 582.00 samples/sec	acc=0.319629
+[2018-05-11 03:26:31]  INFO:root:Epoch[1] Batch [1020]	Speed: 586.62 samples/sec	acc=0.316309
+[2018-05-11 03:26:48]  INFO:root:Epoch[1] Batch [1040]	Speed: 583.70 samples/sec	acc=0.317773
+[2018-05-11 03:27:06]  INFO:root:Epoch[1] Batch [1060]	Speed: 576.23 samples/sec	acc=0.318555
+[2018-05-11 03:27:23]  INFO:root:Epoch[1] Batch [1080]	Speed: 590.73 samples/sec	acc=0.310937
+[2018-05-11 03:28:14]  INFO:root:Epoch[1] Batch [1100]	Speed: 203.11 samples/sec	acc=0.312695
+[2018-05-11 03:29:09]  INFO:root:Epoch[1] Batch [1120]	Speed: 186.18 samples/sec	acc=0.313184
+[2018-05-11 03:30:06]  INFO:root:Epoch[1] Batch [1140]	Speed: 177.00 samples/sec	acc=0.314258
+[2018-05-11 03:31:01]  INFO:root:Epoch[1] Batch [1160]	Speed: 189.44 samples/sec	acc=0.317188
+[2018-05-11 03:31:59]  INFO:root:Epoch[1] Batch [1180]	Speed: 174.51 samples/sec	acc=0.304199
+[2018-05-11 03:32:58]  INFO:root:Epoch[1] Batch [1200]	Speed: 175.32 samples/sec	acc=0.317578
+[2018-05-11 03:33:53]  INFO:root:Epoch[1] Batch [1220]	Speed: 186.38 samples/sec	acc=0.313379
+[2018-05-11 03:34:49]  INFO:root:Epoch[1] Batch [1240]	Speed: 181.44 samples/sec	acc=0.315234
+[2018-05-11 03:35:40]  INFO:root:Epoch[1] Batch [1260]	Speed: 201.17 samples/sec	acc=0.312891
+[2018-05-11 03:36:34]  INFO:root:Epoch[1] Batch [1280]	Speed: 189.21 samples/sec	acc=0.313965
+[2018-05-11 03:37:28]  INFO:root:Epoch[1] Batch [1300]	Speed: 189.74 samples/sec	acc=0.311328
+[2018-05-11 03:38:21]  INFO:root:Epoch[1] Batch [1320]	Speed: 192.72 samples/sec	acc=0.312988
+[2018-05-11 03:39:15]  INFO:root:Epoch[1] Batch [1340]	Speed: 191.42 samples/sec	acc=0.315039
+[2018-05-11 03:40:11]  INFO:root:Epoch[1] Batch [1360]	Speed: 182.88 samples/sec	acc=0.312793
+[2018-05-11 03:41:10]  INFO:root:Epoch[1] Batch [1380]	Speed: 173.74 samples/sec	acc=0.318262
+[2018-05-11 03:42:06]  INFO:root:Epoch[1] Batch [1400]	Speed: 181.71 samples/sec	acc=0.316797
+[2018-05-11 03:42:59]  INFO:root:Epoch[1] Batch [1420]	Speed: 192.85 samples/sec	acc=0.303711
+[2018-05-11 03:43:52]  INFO:root:Epoch[1] Batch [1440]	Speed: 192.45 samples/sec	acc=0.315820
+[2018-05-11 03:44:55]  INFO:root:Epoch[1] Batch [1460]	Speed: 163.52 samples/sec	acc=0.308008
+[2018-05-11 03:45:57]  INFO:root:Epoch[1] Batch [1480]	Speed: 165.93 samples/sec	acc=0.317871
+[2018-05-11 03:46:50]  INFO:root:Epoch[1] Batch [1500]	Speed: 191.38 samples/sec	acc=0.312500
+[2018-05-11 03:47:44]  INFO:root:Epoch[1] Batch [1520]	Speed: 190.12 samples/sec	acc=0.311035
+[2018-05-11 03:48:40]  INFO:root:Epoch[1] Batch [1540]	Speed: 183.62 samples/sec	acc=0.310937
+[2018-05-11 03:49:34]  INFO:root:Epoch[1] Batch [1560]	Speed: 187.54 samples/sec	acc=0.311816
+[2018-05-11 03:49:54]  lr-batch-epoch: 0.1 1568 1
+[2018-05-11 03:50:33]  INFO:root:Epoch[1] Batch [1580]	Speed: 173.50 samples/sec	acc=0.302441
+[2018-05-11 03:51:31]  INFO:root:Epoch[1] Batch [1600]	Speed: 178.95 samples/sec	acc=0.314063
+[2018-05-11 03:52:25]  INFO:root:Epoch[1] Batch [1620]	Speed: 187.96 samples/sec	acc=0.313184
+[2018-05-11 03:53:15]  INFO:root:Epoch[1] Batch [1640]	Speed: 203.42 samples/sec	acc=0.306738
+[2018-05-11 03:54:18]  INFO:root:Epoch[1] Batch [1660]	Speed: 162.73 samples/sec	acc=0.301660
+[2018-05-11 03:55:17]  INFO:root:Epoch[1] Batch [1680]	Speed: 175.57 samples/sec	acc=0.314258
+[2018-05-11 03:56:12]  INFO:root:Epoch[1] Batch [1700]	Speed: 184.39 samples/sec	acc=0.302051
+[2018-05-11 03:57:08]  INFO:root:Epoch[1] Batch [1720]	Speed: 182.86 samples/sec	acc=0.309863
+[2018-05-11 03:58:02]  INFO:root:Epoch[1] Batch [1740]	Speed: 190.30 samples/sec	acc=0.300195
+[2018-05-11 03:58:59]  INFO:root:Epoch[1] Batch [1760]	Speed: 178.23 samples/sec	acc=0.309277
+[2018-05-11 04:00:00]  INFO:root:Epoch[1] Batch [1780]	Speed: 168.67 samples/sec	acc=0.304785
+[2018-05-11 04:00:57]  INFO:root:Epoch[1] Batch [1800]	Speed: 181.16 samples/sec	acc=0.310742
+[2018-05-11 04:01:53]  INFO:root:Epoch[1] Batch [1820]	Speed: 180.33 samples/sec	acc=0.314063
+[2018-05-11 04:02:54]  INFO:root:Epoch[1] Batch [1840]	Speed: 168.67 samples/sec	acc=0.312891
+[2018-05-11 04:03:55]  INFO:root:Epoch[1] Batch [1860]	Speed: 167.91 samples/sec	acc=0.311719
+[2018-05-11 04:04:54]  INFO:root:Epoch[1] Batch [1880]	Speed: 174.67 samples/sec	acc=0.302539
+[2018-05-11 04:05:58]  INFO:root:Epoch[1] Batch [1900]	Speed: 158.53 samples/sec	acc=0.304004
+[2018-05-11 04:06:59]  INFO:root:Epoch[1] Batch [1920]	Speed: 169.45 samples/sec	acc=0.300586
+[2018-05-11 04:07:55]  INFO:root:Epoch[1] Batch [1940]	Speed: 183.84 samples/sec	acc=0.300098
+[2018-05-11 04:08:46]  INFO:root:Epoch[1] Batch [1960]	Speed: 197.34 samples/sec	acc=0.309863
+[2018-05-11 04:09:40]  INFO:root:Epoch[1] Batch [1980]	Speed: 192.73 samples/sec	acc=0.309668
+[2018-05-11 04:10:37]  INFO:root:Epoch[1] Batch [2000]	Speed: 178.71 samples/sec	acc=0.309180
+[2018-05-11 04:11:43]  INFO:root:Epoch[1] Batch [2020]	Speed: 154.35 samples/sec	acc=0.312695
+[2018-05-11 04:12:36]  INFO:root:Epoch[1] Batch [2040]	Speed: 195.06 samples/sec	acc=0.303223
+[2018-05-11 04:13:31]  INFO:root:Epoch[1] Batch [2060]	Speed: 184.16 samples/sec	acc=0.310742
+[2018-05-11 04:14:29]  INFO:root:Epoch[1] Batch [2080]	Speed: 178.87 samples/sec	acc=0.303125
+[2018-05-11 04:15:26]  INFO:root:Epoch[1] Batch [2100]	Speed: 177.81 samples/sec	acc=0.297070
+[2018-05-11 04:16:26]  INFO:root:Epoch[1] Batch [2120]	Speed: 170.26 samples/sec	acc=0.302539
+[2018-05-11 04:17:28]  INFO:root:Epoch[1] Batch [2140]	Speed: 166.15 samples/sec	acc=0.308984
+[2018-05-11 04:18:18]  INFO:root:Epoch[1] Batch [2160]	Speed: 205.08 samples/sec	acc=0.309570
+[2018-05-11 04:19:14]  INFO:root:Epoch[1] Batch [2180]	Speed: 183.33 samples/sec	acc=0.315137
+[2018-05-11 04:20:06]  INFO:root:Epoch[1] Batch [2200]	Speed: 195.88 samples/sec	acc=0.299805
+[2018-05-11 04:21:05]  INFO:root:Epoch[1] Batch [2220]	Speed: 173.87 samples/sec	acc=0.309668
+[2018-05-11 04:21:58]  INFO:root:Epoch[1] Batch [2240]	Speed: 194.27 samples/sec	acc=0.304102
+[2018-05-11 04:22:49]  INFO:root:Epoch[1] Batch [2260]	Speed: 198.64 samples/sec	acc=0.305176
+[2018-05-11 04:23:40]  INFO:root:Epoch[1] Batch [2280]	Speed: 200.07 samples/sec	acc=0.309863
+[2018-05-11 04:24:38]  INFO:root:Epoch[1] Batch [2300]	Speed: 178.55 samples/sec	acc=0.306152
+[2018-05-11 04:25:35]  INFO:root:Epoch[1] Batch [2320]	Speed: 179.20 samples/sec	acc=0.309473
+[2018-05-11 04:26:27]  INFO:root:Epoch[1] Batch [2340]	Speed: 197.12 samples/sec	acc=0.306445
+[2018-05-11 04:27:20]  INFO:root:Epoch[1] Batch [2360]	Speed: 191.36 samples/sec	acc=0.302344
+[2018-05-11 04:28:16]  INFO:root:Epoch[1] Batch [2380]	Speed: 182.80 samples/sec	acc=0.301563
+[2018-05-11 04:29:16]  INFO:root:Epoch[1] Batch [2400]	Speed: 170.67 samples/sec	acc=0.310352
+[2018-05-11 04:30:14]  INFO:root:Epoch[1] Batch [2420]	Speed: 177.96 samples/sec	acc=0.301660
+[2018-05-11 04:31:08]  INFO:root:Epoch[1] Batch [2440]	Speed: 189.51 samples/sec	acc=0.307910
+[2018-05-11 04:32:00]  INFO:root:Epoch[1] Batch [2460]	Speed: 197.12 samples/sec	acc=0.308887
+[2018-05-11 04:32:57]  INFO:root:Epoch[1] Batch [2480]	Speed: 179.18 samples/sec	acc=0.302441
+[2018-05-11 04:33:57]  INFO:root:Epoch[1] Batch [2500]	Speed: 171.73 samples/sec	acc=0.309180
+[2018-05-11 04:34:53]  INFO:root:Epoch[1] Batch [2520]	Speed: 180.42 samples/sec	acc=0.308008
+[2018-05-11 04:35:48]  INFO:root:Epoch[1] Batch [2540]	Speed: 188.45 samples/sec	acc=0.304297
+[2018-05-11 04:36:41]  INFO:root:Epoch[1] Batch [2560]	Speed: 192.67 samples/sec	acc=0.314453
+[2018-05-11 04:37:07]  lr-batch-epoch: 0.1 2568 1
+[2018-05-11 04:37:07]  testing verification..
+[2018-05-11 04:39:17]  (12000, 128)
+[2018-05-11 04:39:17]  infer time 129.08571
+[2018-05-11 04:39:21]  [lfw][10000]XNorm: 10.983491
+[2018-05-11 04:39:21]  [lfw][10000]Accuracy-Flip: 0.99200+-0.00476
+[2018-05-11 04:39:21]  testing verification..
+[2018-05-11 04:41:59]  (14000, 128)
+[2018-05-11 04:41:59]  infer time 155.821361
+[2018-05-11 04:42:03]  [cfp_fp][10000]XNorm: 8.831272
+[2018-05-11 04:42:03]  [cfp_fp][10000]Accuracy-Flip: 0.87300+-0.01871
+[2018-05-11 04:42:03]  testing verification..
+[2018-05-11 04:44:09]  (12000, 128)
+[2018-05-11 04:44:09]  infer time 125.698742
+[2018-05-11 04:44:13]  [agedb_30][10000]XNorm: 10.797952
+[2018-05-11 04:44:13]  [agedb_30][10000]Accuracy-Flip: 0.94417+-0.01083
+[2018-05-11 04:44:13]  saving 5
+[2018-05-11 04:44:17]  [10000]Accuracy-Highest: 0.94883
+[2018-05-11 04:44:17]  INFO:root:Saved checkpoint to "/data/output/model-y1-arcface-0005.params"
+[2018-05-11 04:44:46]  INFO:root:Epoch[1] Batch [2580]	Speed: 21.10 samples/sec	acc=0.309082
+[2018-05-11 04:45:48]  INFO:root:Epoch[1] Batch [2600]	Speed: 165.78 samples/sec	acc=0.312012
+[2018-05-11 04:46:48]  INFO:root:Epoch[1] Batch [2620]	Speed: 170.47 samples/sec	acc=0.304980
+[2018-05-11 04:47:46]  INFO:root:Epoch[1] Batch [2640]	Speed: 177.10 samples/sec	acc=0.301367
+[2018-05-11 04:48:40]  INFO:root:Epoch[1] Batch [2660]	Speed: 188.78 samples/sec	acc=0.309375
+[2018-05-11 04:49:33]  INFO:root:Epoch[1] Batch [2680]	Speed: 192.59 samples/sec	acc=0.305273
+[2018-05-11 04:50:29]  INFO:root:Epoch[1] Batch [2700]	Speed: 182.89 samples/sec	acc=0.298730
+[2018-05-11 04:51:29]  INFO:root:Epoch[1] Batch [2720]	Speed: 170.77 samples/sec	acc=0.296094
+[2018-05-11 04:52:27]  INFO:root:Epoch[1] Batch [2740]	Speed: 176.85 samples/sec	acc=0.309277
+[2018-05-11 04:53:24]  INFO:root:Epoch[1] Batch [2760]	Speed: 179.12 samples/sec	acc=0.303613
+[2018-05-11 04:54:21]  INFO:root:Epoch[1] Batch [2780]	Speed: 181.68 samples/sec	acc=0.300781
+[2018-05-11 04:55:22]  INFO:root:Epoch[1] Batch [2800]	Speed: 168.07 samples/sec	acc=0.306543
+[2018-05-11 04:56:23]  INFO:root:Epoch[1] Batch [2820]	Speed: 167.12 samples/sec	acc=0.296387
+[2018-05-11 04:57:28]  INFO:root:Epoch[1] Batch [2840]	Speed: 157.98 samples/sec	acc=0.304785
+[2018-05-11 04:58:31]  INFO:root:Epoch[1] Batch [2860]	Speed: 160.93 samples/sec	acc=0.310547
+[2018-05-11 04:59:34]  INFO:root:Epoch[1] Batch [2880]	Speed: 163.48 samples/sec	acc=0.295312
+[2018-05-11 05:00:35]  INFO:root:Epoch[1] Batch [2900]	Speed: 168.30 samples/sec	acc=0.300293
+[2018-05-11 05:01:36]  INFO:root:Epoch[1] Batch [2920]	Speed: 166.65 samples/sec	acc=0.301855
+[2018-05-11 05:02:39]  INFO:root:Epoch[1] Batch [2940]	Speed: 163.59 samples/sec	acc=0.308301
+[2018-05-11 05:03:42]  INFO:root:Epoch[1] Batch [2960]	Speed: 163.24 samples/sec	acc=0.308496
+[2018-05-11 05:04:44]  INFO:root:Epoch[1] Batch [2980]	Speed: 162.99 samples/sec	acc=0.300879
+[2018-05-11 05:05:45]  INFO:root:Epoch[1] Batch [3000]	Speed: 168.76 samples/sec	acc=0.304590
+[2018-05-11 05:06:52]  INFO:root:Epoch[1] Batch [3020]	Speed: 152.71 samples/sec	acc=0.311035
+[2018-05-11 05:07:55]  INFO:root:Epoch[1] Batch [3040]	Speed: 162.99 samples/sec	acc=0.309570
+[2018-05-11 05:08:55]  INFO:root:Epoch[1] Batch [3060]	Speed: 171.65 samples/sec	acc=0.311621
+[2018-05-11 05:09:56]  INFO:root:Epoch[1] Batch [3080]	Speed: 167.34 samples/sec	acc=0.305469
+[2018-05-11 05:10:59]  INFO:root:Epoch[1] Batch [3100]	Speed: 161.54 samples/sec	acc=0.306836
+[2018-05-11 05:12:06]  INFO:root:Epoch[1] Batch [3120]	Speed: 153.17 samples/sec	acc=0.300684
+[2018-05-11 05:13:13]  INFO:root:Epoch[1] Batch [3140]	Speed: 153.56 samples/sec	acc=0.294824
+[2018-05-11 05:14:14]  INFO:root:Epoch[1] Batch [3160]	Speed: 166.52 samples/sec	acc=0.304199
+[2018-05-11 05:15:16]  INFO:root:Epoch[1] Batch [3180]	Speed: 166.60 samples/sec	acc=0.301074
+[2018-05-11 05:16:18]  INFO:root:Epoch[1] Batch [3200]	Speed: 165.38 samples/sec	acc=0.299805
+[2018-05-11 05:17:19]  INFO:root:Epoch[1] Batch [3220]	Speed: 168.02 samples/sec	acc=0.302930
+[2018-05-11 05:18:25]  INFO:root:Epoch[1] Batch [3240]	Speed: 153.49 samples/sec	acc=0.303320
+[2018-05-11 05:19:30]  INFO:root:Epoch[1] Batch [3260]	Speed: 158.25 samples/sec	acc=0.297559
+[2018-05-11 05:20:35]  INFO:root:Epoch[1] Batch [3280]	Speed: 156.57 samples/sec	acc=0.311035
+[2018-05-11 05:21:43]  INFO:root:Epoch[1] Batch [3300]	Speed: 150.89 samples/sec	acc=0.303613
+[2018-05-11 05:22:53]  INFO:root:Epoch[1] Batch [3320]	Speed: 146.40 samples/sec	acc=0.307422
+[2018-05-11 05:24:01]  INFO:root:Epoch[1] Batch [3340]	Speed: 151.69 samples/sec	acc=0.301855
+[2018-05-11 05:25:07]  INFO:root:Epoch[1] Batch [3360]	Speed: 154.17 samples/sec	acc=0.311719
+[2018-05-11 05:26:08]  INFO:root:Epoch[1] Batch [3380]	Speed: 167.20 samples/sec	acc=0.302832
+[2018-05-11 05:27:12]  INFO:root:Epoch[1] Batch [3400]	Speed: 160.36 samples/sec	acc=0.310645
+[2018-05-11 05:28:16]  INFO:root:Epoch[1] Batch [3420]	Speed: 160.04 samples/sec	acc=0.305859
+[2018-05-11 05:29:24]  INFO:root:Epoch[1] Batch [3440]	Speed: 151.57 samples/sec	acc=0.306738
+[2018-05-11 05:30:29]  INFO:root:Epoch[1] Batch [3460]	Speed: 157.10 samples/sec	acc=0.303613
+[2018-05-11 05:31:35]  INFO:root:Epoch[1] Batch [3480]	Speed: 156.30 samples/sec	acc=0.306738
+[2018-05-11 05:32:40]  INFO:root:Epoch[1] Batch [3500]	Speed: 156.93 samples/sec	acc=0.300879
+[2018-05-11 05:33:45]  INFO:root:Epoch[1] Batch [3520]	Speed: 158.03 samples/sec	acc=0.308398
+[2018-05-11 05:34:50]  INFO:root:Epoch[1] Batch [3540]	Speed: 156.94 samples/sec	acc=0.306641
+[2018-05-11 05:35:57]  INFO:root:Epoch[1] Batch [3560]	Speed: 152.68 samples/sec	acc=0.303809
+[2018-05-11 05:36:25]  lr-batch-epoch: 0.1 3568 1
+[2018-05-11 05:37:02]  INFO:root:Epoch[1] Batch [3580]	Speed: 156.25 samples/sec	acc=0.310449
+[2018-05-11 05:38:10]  INFO:root:Epoch[1] Batch [3600]	Speed: 151.73 samples/sec	acc=0.304004
+[2018-05-11 05:39:14]  INFO:root:Epoch[1] Batch [3620]	Speed: 160.76 samples/sec	acc=0.311230
+[2018-05-11 05:40:21]  INFO:root:Epoch[1] Batch [3640]	Speed: 153.18 samples/sec	acc=0.307812
+[2018-05-11 05:41:28]  INFO:root:Epoch[1] Batch [3660]	Speed: 151.05 samples/sec	acc=0.290234
+[2018-05-11 05:42:33]  INFO:root:Epoch[1] Batch [3680]	Speed: 157.43 samples/sec	acc=0.305273
+[2018-05-11 05:43:39]  INFO:root:Epoch[1] Batch [3700]	Speed: 156.42 samples/sec	acc=0.301563
+[2018-05-11 05:44:44]  INFO:root:Epoch[1] Batch [3720]	Speed: 157.54 samples/sec	acc=0.312012
+[2018-05-11 05:45:47]  INFO:root:Epoch[1] Batch [3740]	Speed: 163.32 samples/sec	acc=0.307227
+[2018-05-11 05:46:54]  INFO:root:Epoch[1] Batch [3760]	Speed: 151.31 samples/sec	acc=0.300586
+[2018-05-11 05:48:01]  INFO:root:Epoch[1] Batch [3780]	Speed: 153.48 samples/sec	acc=0.304688
+[2018-05-11 05:49:07]  INFO:root:Epoch[1] Batch [3800]	Speed: 154.62 samples/sec	acc=0.304102
+[2018-05-11 05:50:14]  INFO:root:Epoch[1] Batch [3820]	Speed: 152.09 samples/sec	acc=0.292187
+[2018-05-11 05:51:16]  INFO:root:Epoch[1] Batch [3840]	Speed: 165.19 samples/sec	acc=0.304688
+[2018-05-11 05:52:24]  INFO:root:Epoch[1] Batch [3860]	Speed: 152.49 samples/sec	acc=0.306641
+[2018-05-11 05:53:30]  INFO:root:Epoch[1] Batch [3880]	Speed: 155.31 samples/sec	acc=0.308594
+[2018-05-11 05:54:36]  INFO:root:Epoch[1] Batch [3900]	Speed: 153.57 samples/sec	acc=0.303223
+[2018-05-11 05:55:37]  INFO:root:Epoch[1] Batch [3920]	Speed: 168.74 samples/sec	acc=0.310352
+[2018-05-11 05:56:43]  INFO:root:Epoch[1] Batch [3940]	Speed: 155.79 samples/sec	acc=0.307324
+[2018-05-11 05:57:49]  INFO:root:Epoch[1] Batch [3960]	Speed: 153.73 samples/sec	acc=0.303711
+[2018-05-11 05:58:56]  INFO:root:Epoch[1] Batch [3980]	Speed: 152.95 samples/sec	acc=0.300098
+[2018-05-11 06:00:02]  INFO:root:Epoch[1] Batch [4000]	Speed: 155.64 samples/sec	acc=0.303613
+[2018-05-11 06:01:09]  INFO:root:Epoch[1] Batch [4020]	Speed: 153.35 samples/sec	acc=0.304492
+[2018-05-11 06:02:08]  INFO:root:Epoch[1] Batch [4040]	Speed: 173.46 samples/sec	acc=0.304492
+[2018-05-11 06:03:10]  INFO:root:Epoch[1] Batch [4060]	Speed: 164.78 samples/sec	acc=0.294238
+[2018-05-11 06:04:14]  INFO:root:Epoch[1] Batch [4080]	Speed: 159.79 samples/sec	acc=0.302539
+[2018-05-11 06:05:18]  INFO:root:Epoch[1] Batch [4100]	Speed: 159.07 samples/sec	acc=0.302441
+[2018-05-11 06:06:11]  INFO:root:Epoch[1] Batch [4120]	Speed: 196.54 samples/sec	acc=0.313965
+[2018-05-11 06:06:28]  INFO:root:Epoch[1] Batch [4140]	Speed: 581.35 samples/sec	acc=0.296777
+[2018-05-11 06:06:46]  INFO:root:Epoch[1] Batch [4160]	Speed: 584.97 samples/sec	acc=0.301953
+[2018-05-11 06:07:03]  INFO:root:Epoch[1] Batch [4180]	Speed: 582.20 samples/sec	acc=0.320508
+[2018-05-11 06:07:21]  INFO:root:Epoch[1] Batch [4200]	Speed: 584.69 samples/sec	acc=0.302734
+[2018-05-11 06:07:38]  INFO:root:Epoch[1] Batch [4220]	Speed: 586.96 samples/sec	acc=0.307812
+[2018-05-11 06:07:56]  INFO:root:Epoch[1] Batch [4240]	Speed: 587.06 samples/sec	acc=0.300195
+[2018-05-11 06:08:13]  INFO:root:Epoch[1] Batch [4260]	Speed: 584.76 samples/sec	acc=0.301270
+[2018-05-11 06:08:31]  INFO:root:Epoch[1] Batch [4280]	Speed: 586.24 samples/sec	acc=0.308691
+[2018-05-11 06:08:48]  INFO:root:Epoch[1] Batch [4300]	Speed: 585.93 samples/sec	acc=0.298047
+[2018-05-11 06:09:06]  INFO:root:Epoch[1] Batch [4320]	Speed: 585.00 samples/sec	acc=0.302734
+[2018-05-11 06:09:23]  INFO:root:Epoch[1] Batch [4340]	Speed: 585.98 samples/sec	acc=0.304883
+[2018-05-11 06:09:41]  INFO:root:Epoch[1] Batch [4360]	Speed: 584.49 samples/sec	acc=0.308203
+[2018-05-11 06:09:58]  INFO:root:Epoch[1] Batch [4380]	Speed: 582.78 samples/sec	acc=0.296191
+[2018-05-11 06:10:16]  INFO:root:Epoch[1] Batch [4400]	Speed: 585.34 samples/sec	acc=0.306836
+[2018-05-11 06:10:33]  INFO:root:Epoch[1] Batch [4420]	Speed: 585.10 samples/sec	acc=0.303223
+[2018-05-11 06:10:51]  INFO:root:Epoch[1] Batch [4440]	Speed: 586.26 samples/sec	acc=0.306250
+[2018-05-11 06:11:08]  INFO:root:Epoch[1] Batch [4460]	Speed: 581.00 samples/sec	acc=0.306641
+[2018-05-11 06:11:26]  INFO:root:Epoch[1] Batch [4480]	Speed: 586.03 samples/sec	acc=0.301465
+[2018-05-11 06:11:43]  INFO:root:Epoch[1] Batch [4500]	Speed: 584.57 samples/sec	acc=0.295801
+[2018-05-11 06:12:01]  INFO:root:Epoch[1] Batch [4520]	Speed: 583.70 samples/sec	acc=0.303906
+[2018-05-11 06:12:18]  INFO:root:Epoch[1] Batch [4540]	Speed: 584.95 samples/sec	acc=0.295117
+[2018-05-11 06:12:36]  INFO:root:Epoch[1] Batch [4560]	Speed: 585.80 samples/sec	acc=0.307227
+[2018-05-11 06:12:43]  lr-batch-epoch: 0.1 4568 1
+[2018-05-11 06:12:43]  testing verification..
+[2018-05-11 06:12:58]  (12000, 128)
+[2018-05-11 06:12:58]  infer time 14.310899
+[2018-05-11 06:13:01]  [lfw][12000]XNorm: 11.166428
+[2018-05-11 06:13:01]  [lfw][12000]Accuracy-Flip: 0.99317+-0.00474
+[2018-05-11 06:13:01]  testing verification..
+[2018-05-11 06:13:19]  (14000, 128)
+[2018-05-11 06:13:19]  infer time 16.826516
+[2018-05-11 06:13:23]  [cfp_fp][12000]XNorm: 9.060294
+[2018-05-11 06:13:23]  [cfp_fp][12000]Accuracy-Flip: 0.86871+-0.01598
+[2018-05-11 06:13:23]  testing verification..
+[2018-05-11 06:13:37]  (12000, 128)
+[2018-05-11 06:13:37]  infer time 13.70444
+[2018-05-11 06:13:41]  [agedb_30][12000]XNorm: 11.011595
+[2018-05-11 06:13:41]  [agedb_30][12000]Accuracy-Flip: 0.94467+-0.01308
+[2018-05-11 06:13:41]  saving 6
+[2018-05-11 06:13:41]  [12000]Accuracy-Highest: 0.94883
+[2018-05-11 06:13:41]  INFO:root:Saved checkpoint to "/data/output/model-y1-arcface-0006.params"
+[2018-05-11 06:13:51]  INFO:root:Epoch[1] Batch [4580]	Speed: 135.94 samples/sec	acc=0.301270
+[2018-05-11 06:14:09]  INFO:root:Epoch[1] Batch [4600]	Speed: 584.56 samples/sec	acc=0.300195
+[2018-05-11 06:14:26]  INFO:root:Epoch[1] Batch [4620]	Speed: 584.65 samples/sec	acc=0.304883
+[2018-05-11 06:14:44]  INFO:root:Epoch[1] Batch [4640]	Speed: 586.17 samples/sec	acc=0.303711
+[2018-05-11 06:15:01]  INFO:root:Epoch[1] Batch [4660]	Speed: 586.75 samples/sec	acc=0.306641
+[2018-05-11 06:15:19]  INFO:root:Epoch[1] Batch [4680]	Speed: 581.85 samples/sec	acc=0.311426
+[2018-05-11 06:15:36]  INFO:root:Epoch[1] Batch [4700]	Speed: 587.99 samples/sec	acc=0.300488
+[2018-05-11 06:15:54]  INFO:root:Epoch[1] Batch [4720]	Speed: 587.93 samples/sec	acc=0.310352
+[2018-05-11 06:16:11]  INFO:root:Epoch[1] Batch [4740]	Speed: 583.45 samples/sec	acc=0.300586
+[2018-05-11 06:16:29]  INFO:root:Epoch[1] Batch [4760]	Speed: 583.31 samples/sec	acc=0.304395
+[2018-05-11 06:16:46]  INFO:root:Epoch[1] Batch [4780]	Speed: 584.91 samples/sec	acc=0.305078
+[2018-05-11 06:17:04]  INFO:root:Epoch[1] Batch [4800]	Speed: 586.63 samples/sec	acc=0.305664
+[2018-05-11 06:17:21]  INFO:root:Epoch[1] Batch [4820]	Speed: 585.69 samples/sec	acc=0.300586
+[2018-05-11 06:17:39]  INFO:root:Epoch[1] Batch [4840]	Speed: 586.00 samples/sec	acc=0.300781
+[2018-05-11 06:17:56]  INFO:root:Epoch[1] Batch [4860]	Speed: 583.47 samples/sec	acc=0.294238
+[2018-05-11 06:18:14]  INFO:root:Epoch[1] Batch [4880]	Speed: 584.48 samples/sec	acc=0.303906
+[2018-05-11 06:18:31]  INFO:root:Epoch[1] Batch [4900]	Speed: 584.91 samples/sec	acc=0.295215
+[2018-05-11 06:18:49]  INFO:root:Epoch[1] Batch [4920]	Speed: 586.44 samples/sec	acc=0.308301
+[2018-05-11 06:19:06]  INFO:root:Epoch[1] Batch [4940]	Speed: 583.74 samples/sec	acc=0.300391
+[2018-05-11 06:19:24]  INFO:root:Epoch[1] Batch [4960]	Speed: 584.99 samples/sec	acc=0.296973
+[2018-05-11 06:19:41]  INFO:root:Epoch[1] Batch [4980]	Speed: 585.60 samples/sec	acc=0.305957
+[2018-05-11 06:19:59]  INFO:root:Epoch[1] Batch [5000]	Speed: 585.30 samples/sec	acc=0.300195
+[2018-05-11 06:20:16]  INFO:root:Epoch[1] Batch [5020]	Speed: 584.43 samples/sec	acc=0.300293
+[2018-05-11 06:20:34]  INFO:root:Epoch[1] Batch [5040]	Speed: 585.34 samples/sec	acc=0.304785
+[2018-05-11 06:20:51]  INFO:root:Epoch[1] Batch [5060]	Speed: 585.30 samples/sec	acc=0.305957
+[2018-05-11 06:21:09]  INFO:root:Epoch[1] Batch [5080]	Speed: 586.19 samples/sec	acc=0.306738
+[2018-05-11 06:21:26]  INFO:root:Epoch[1] Batch [5100]	Speed: 583.90 samples/sec	acc=0.300781
+[2018-05-11 06:21:44]  INFO:root:Epoch[1] Batch [5120]	Speed: 585.52 samples/sec	acc=0.304492
+[2018-05-11 06:22:01]  INFO:root:Epoch[1] Batch [5140]	Speed: 584.16 samples/sec	acc=0.301563
+[2018-05-11 06:22:19]  INFO:root:Epoch[1] Batch [5160]	Speed: 584.64 samples/sec	acc=0.304590
+[2018-05-11 06:22:36]  INFO:root:Epoch[1] Batch [5180]	Speed: 582.63 samples/sec	acc=0.297559
+[2018-05-11 06:22:54]  INFO:root:Epoch[1] Batch [5200]	Speed: 586.37 samples/sec	acc=0.291895
+[2018-05-11 06:23:11]  INFO:root:Epoch[1] Batch [5220]	Speed: 585.40 samples/sec	acc=0.297852
+[2018-05-11 06:23:29]  INFO:root:Epoch[1] Batch [5240]	Speed: 585.34 samples/sec	acc=0.302051
+[2018-05-11 06:23:46]  INFO:root:Epoch[1] Batch [5260]	Speed: 586.70 samples/sec	acc=0.298633
+[2018-05-11 06:24:04]  INFO:root:Epoch[1] Batch [5280]	Speed: 583.54 samples/sec	acc=0.300195
+[2018-05-11 06:24:21]  INFO:root:Epoch[1] Batch [5300]	Speed: 583.73 samples/sec	acc=0.302539
+[2018-05-11 06:24:39]  INFO:root:Epoch[1] Batch [5320]	Speed: 582.80 samples/sec	acc=0.299316
+[2018-05-11 06:24:56]  INFO:root:Epoch[1] Batch [5340]	Speed: 584.93 samples/sec	acc=0.299414
+[2018-05-11 06:25:14]  INFO:root:Epoch[1] Batch [5360]	Speed: 577.37 samples/sec	acc=0.306055
+[2018-05-11 06:25:32]  INFO:root:Epoch[1] Batch [5380]	Speed: 585.01 samples/sec	acc=0.312891
+[2018-05-11 06:25:49]  INFO:root:Epoch[1] Batch [5400]	Speed: 584.94 samples/sec	acc=0.303906
+[2018-05-11 06:26:07]  INFO:root:Epoch[1] Batch [5420]	Speed: 583.55 samples/sec	acc=0.296582
+[2018-05-11 06:26:24]  INFO:root:Epoch[1] Batch [5440]	Speed: 585.51 samples/sec	acc=0.295605
+[2018-05-11 06:26:42]  INFO:root:Epoch[1] Batch [5460]	Speed: 584.97 samples/sec	acc=0.301758
+[2018-05-11 06:26:59]  INFO:root:Epoch[1] Batch [5480]	Speed: 580.83 samples/sec	acc=0.302344
+[2018-05-11 06:27:17]  INFO:root:Epoch[1] Batch [5500]	Speed: 585.31 samples/sec	acc=0.299902
+[2018-05-11 06:27:34]  INFO:root:Epoch[1] Batch [5520]	Speed: 585.55 samples/sec	acc=0.307129
+[2018-05-11 06:27:52]  INFO:root:Epoch[1] Batch [5540]	Speed: 585.76 samples/sec	acc=0.307324
+[2018-05-11 06:28:09]  INFO:root:Epoch[1] Batch [5560]	Speed: 584.93 samples/sec	acc=0.307129
+[2018-05-11 06:28:16]  lr-batch-epoch: 0.1 5568 1
+[2018-05-11 06:28:27]  INFO:root:Epoch[1] Batch [5580]	Speed: 585.36 samples/sec	acc=0.299219
+[2018-05-11 06:28:44]  INFO:root:Epoch[1] Batch [5600]	Speed: 585.78 samples/sec	acc=0.308496
+[2018-05-11 06:29:02]  INFO:root:Epoch[1] Batch [5620]	Speed: 586.62 samples/sec	acc=0.300098
+[2018-05-11 06:29:19]  INFO:root:Epoch[1] Batch [5640]	Speed: 586.48 samples/sec	acc=0.292871
+[2018-05-11 06:29:37]  INFO:root:Epoch[1] Batch [5660]	Speed: 587.90 samples/sec	acc=0.287598
+[2018-05-11 06:29:54]  INFO:root:Epoch[1] Batch [5680]	Speed: 588.59 samples/sec	acc=0.296875
+[2018-05-11 06:30:11]  INFO:root:Epoch[1] Batch [5700]	Speed: 585.24 samples/sec	acc=0.305566
+[2018-05-11 06:30:29]  INFO:root:Epoch[1] Batch [5720]	Speed: 587.52 samples/sec	acc=0.302246
+[2018-05-11 06:30:46]  INFO:root:Epoch[1] Batch [5740]	Speed: 587.75 samples/sec	acc=0.303125
+[2018-05-11 06:31:04]  INFO:root:Epoch[1] Batch [5760]	Speed: 587.30 samples/sec	acc=0.301660
+[2018-05-11 06:31:21]  INFO:root:Epoch[1] Batch [5780]	Speed: 587.36 samples/sec	acc=0.300488
+[2018-05-11 06:31:39]  INFO:root:Epoch[1] Batch [5800]	Speed: 586.76 samples/sec	acc=0.307520
+[2018-05-11 06:31:56]  INFO:root:Epoch[1] Batch [5820]	Speed: 587.80 samples/sec	acc=0.303223
+[2018-05-11 06:32:14]  INFO:root:Epoch[1] Batch [5840]	Speed: 580.23 samples/sec	acc=0.308105
+[2018-05-11 06:32:31]  INFO:root:Epoch[1] Batch [5860]	Speed: 581.76 samples/sec	acc=0.310352
+[2018-05-11 06:32:49]  INFO:root:Epoch[1] Batch [5880]	Speed: 585.20 samples/sec	acc=0.306250
+[2018-05-11 06:33:06]  INFO:root:Epoch[1] Batch [5900]	Speed: 585.92 samples/sec	acc=0.303711
+[2018-05-11 06:33:24]  INFO:root:Epoch[1] Batch [5920]	Speed: 586.69 samples/sec	acc=0.300391
+[2018-05-11 06:33:41]  INFO:root:Epoch[1] Batch [5940]	Speed: 585.83 samples/sec	acc=0.301758
+[2018-05-11 06:33:59]  INFO:root:Epoch[1] Batch [5960]	Speed: 582.28 samples/sec	acc=0.300586
+[2018-05-11 06:34:16]  INFO:root:Epoch[1] Batch [5980]	Speed: 585.99 samples/sec	acc=0.293848
+[2018-05-11 06:34:34]  INFO:root:Epoch[1] Batch [6000]	Speed: 585.65 samples/sec	acc=0.305762
+[2018-05-11 06:34:51]  INFO:root:Epoch[1] Batch [6020]	Speed: 586.46 samples/sec	acc=0.292480
+[2018-05-11 06:35:09]  INFO:root:Epoch[1] Batch [6040]	Speed: 586.23 samples/sec	acc=0.294434
+[2018-05-11 06:35:26]  INFO:root:Epoch[1] Batch [6060]	Speed: 588.79 samples/sec	acc=0.292187
+[2018-05-11 06:35:44]  INFO:root:Epoch[1] Batch [6080]	Speed: 584.50 samples/sec	acc=0.302734
+[2018-05-11 06:36:01]  INFO:root:Epoch[1] Batch [6100]	Speed: 582.90 samples/sec	acc=0.305762
+[2018-05-11 06:36:19]  INFO:root:Epoch[1] Batch [6120]	Speed: 585.96 samples/sec	acc=0.298633
+[2018-05-11 06:36:36]  INFO:root:Epoch[1] Batch [6140]	Speed: 586.86 samples/sec	acc=0.299023
+[2018-05-11 06:36:54]  INFO:root:Epoch[1] Batch [6160]	Speed: 583.68 samples/sec	acc=0.296094
+[2018-05-11 06:37:11]  INFO:root:Epoch[1] Batch [6180]	Speed: 583.20 samples/sec	acc=0.302246
+[2018-05-11 06:37:29]  INFO:root:Epoch[1] Batch [6200]	Speed: 581.67 samples/sec	acc=0.306641
+[2018-05-11 06:37:46]  INFO:root:Epoch[1] Batch [6220]	Speed: 585.68 samples/sec	acc=0.298047
+[2018-05-11 06:38:04]  INFO:root:Epoch[1] Batch [6240]	Speed: 578.27 samples/sec	acc=0.306836
+[2018-05-11 06:38:22]  INFO:root:Epoch[1] Batch [6260]	Speed: 581.41 samples/sec	acc=0.304199
+[2018-05-11 06:38:39]  INFO:root:Epoch[1] Batch [6280]	Speed: 583.58 samples/sec	acc=0.306543
+[2018-05-11 06:38:57]  INFO:root:Epoch[1] Batch [6300]	Speed: 586.15 samples/sec	acc=0.311133
+[2018-05-11 06:39:14]  INFO:root:Epoch[1] Batch [6320]	Speed: 584.31 samples/sec	acc=0.313965
+[2018-05-11 06:39:32]  INFO:root:Epoch[1] Batch [6340]	Speed: 584.17 samples/sec	acc=0.305957
+[2018-05-11 06:39:49]  INFO:root:Epoch[1] Batch [6360]	Speed: 582.83 samples/sec	acc=0.312988
+[2018-05-11 06:40:07]  INFO:root:Epoch[1] Batch [6380]	Speed: 584.87 samples/sec	acc=0.292285
+[2018-05-11 06:40:24]  INFO:root:Epoch[1] Batch [6400]	Speed: 585.31 samples/sec	acc=0.303027
+[2018-05-11 06:40:42]  INFO:root:Epoch[1] Batch [6420]	Speed: 583.85 samples/sec	acc=0.304395
+[2018-05-11 06:40:59]  INFO:root:Epoch[1] Batch [6440]	Speed: 583.66 samples/sec	acc=0.305469
+[2018-05-11 06:41:17]  INFO:root:Epoch[1] Batch [6460]	Speed: 577.45 samples/sec	acc=0.299609
+[2018-05-11 06:41:35]  INFO:root:Epoch[1] Batch [6480]	Speed: 587.01 samples/sec	acc=0.305762
+[2018-05-11 06:41:52]  INFO:root:Epoch[1] Batch [6500]	Speed: 583.58 samples/sec	acc=0.299512
+[2018-05-11 06:42:10]  INFO:root:Epoch[1] Batch [6520]	Speed: 581.74 samples/sec	acc=0.307715
+[2018-05-11 06:42:27]  INFO:root:Epoch[1] Batch [6540]	Speed: 585.29 samples/sec	acc=0.309375
+[2018-05-11 06:42:45]  INFO:root:Epoch[1] Batch [6560]	Speed: 586.97 samples/sec	acc=0.304980
+[2018-05-11 06:42:52]  lr-batch-epoch: 0.1 6568 1
+[2018-05-11 06:42:52]  testing verification..
+[2018-05-11 06:43:06]  (12000, 128)
+[2018-05-11 06:43:06]  infer time 14.479427
+[2018-05-11 06:43:10]  [lfw][14000]XNorm: 11.252309
+[2018-05-11 06:43:10]  [lfw][14000]Accuracy-Flip: 0.99417+-0.00473
+[2018-05-11 06:43:10]  testing verification..
+[2018-05-11 06:43:27]  (14000, 128)
+[2018-05-11 06:43:27]  infer time 16.526555
+[2018-05-11 06:43:31]  [cfp_fp][14000]XNorm: 9.096808
+[2018-05-11 06:43:31]  [cfp_fp][14000]Accuracy-Flip: 0.87229+-0.01581
+[2018-05-11 06:43:31]  testing verification..
+[2018-05-11 06:43:45]  (12000, 128)
+[2018-05-11 06:43:45]  infer time 13.761091
+[2018-05-11 06:43:49]  [agedb_30][14000]XNorm: 11.080374
+[2018-05-11 06:43:49]  [agedb_30][14000]Accuracy-Flip: 0.94067+-0.01436
+[2018-05-11 06:43:49]  saving 7
+[2018-05-11 06:43:50]  [14000]Accuracy-Highest: 0.94883
+[2018-05-11 06:43:50]  INFO:root:Saved checkpoint to "/data/output/model-y1-arcface-0007.params"
+[2018-05-11 06:43:59]  INFO:root:Epoch[1] Batch [6580]	Speed: 136.91 samples/sec	acc=0.312402
+[2018-05-11 06:44:17]  INFO:root:Epoch[1] Batch [6600]	Speed: 582.79 samples/sec	acc=0.301074
+[2018-05-11 06:44:35]  INFO:root:Epoch[1] Batch [6620]	Speed: 585.58 samples/sec	acc=0.305469
+[2018-05-11 06:44:52]  INFO:root:Epoch[1] Batch [6640]	Speed: 584.27 samples/sec	acc=0.307715
+[2018-05-11 06:45:10]  INFO:root:Epoch[1] Batch [6660]	Speed: 586.02 samples/sec	acc=0.305371
+[2018-05-11 06:45:27]  INFO:root:Epoch[1] Batch [6680]	Speed: 585.36 samples/sec	acc=0.305078
+[2018-05-11 06:45:45]  INFO:root:Epoch[1] Batch [6700]	Speed: 584.75 samples/sec	acc=0.302148
+[2018-05-11 06:46:02]  INFO:root:Epoch[1] Batch [6720]	Speed: 582.34 samples/sec	acc=0.294238
+[2018-05-11 06:46:20]  INFO:root:Epoch[1] Batch [6740]	Speed: 584.34 samples/sec	acc=0.304785
+[2018-05-11 06:46:37]  INFO:root:Epoch[1] Batch [6760]	Speed: 581.05 samples/sec	acc=0.304004
+[2018-05-11 06:46:55]  INFO:root:Epoch[1] Batch [6780]	Speed: 586.15 samples/sec	acc=0.307227
+[2018-05-11 06:47:12]  INFO:root:Epoch[1] Batch [6800]	Speed: 583.25 samples/sec	acc=0.309375
+[2018-05-11 06:47:30]  INFO:root:Epoch[1] Batch [6820]	Speed: 585.27 samples/sec	acc=0.305664
+[2018-05-11 06:47:47]  INFO:root:Epoch[1] Batch [6840]	Speed: 585.00 samples/sec	acc=0.297168
+[2018-05-11 06:48:05]  INFO:root:Epoch[1] Batch [6860]	Speed: 583.82 samples/sec	acc=0.297266
+[2018-05-11 06:48:22]  INFO:root:Epoch[1] Batch [6880]	Speed: 584.32 samples/sec	acc=0.303613
+[2018-05-11 06:48:40]  INFO:root:Epoch[1] Batch [6900]	Speed: 585.77 samples/sec	acc=0.302832
+[2018-05-11 06:48:57]  INFO:root:Epoch[1] Batch [6920]	Speed: 583.92 samples/sec	acc=0.308691
+[2018-05-11 06:49:15]  INFO:root:Epoch[1] Batch [6940]	Speed: 585.53 samples/sec	acc=0.304102
+[2018-05-11 06:49:32]  INFO:root:Epoch[1] Batch [6960]	Speed: 584.83 samples/sec	acc=0.303223
+[2018-05-11 06:49:50]  INFO:root:Epoch[1] Batch [6980]	Speed: 585.03 samples/sec	acc=0.303125
+[2018-05-11 06:50:07]  INFO:root:Epoch[1] Batch [7000]	Speed: 583.61 samples/sec	acc=0.309375
+[2018-05-11 06:50:25]  INFO:root:Epoch[1] Batch [7020]	Speed: 577.57 samples/sec	acc=0.306152
+[2018-05-11 06:50:43]  INFO:root:Epoch[1] Batch [7040]	Speed: 583.36 samples/sec	acc=0.297266
+[2018-05-11 06:51:00]  INFO:root:Epoch[1] Batch [7060]	Speed: 584.78 samples/sec	acc=0.301270
+[2018-05-11 06:51:18]  INFO:root:Epoch[1] Batch [7080]	Speed: 582.67 samples/sec	acc=0.302051
+[2018-05-11 06:51:35]  INFO:root:Epoch[1] Batch [7100]	Speed: 584.23 samples/sec	acc=0.300488
+[2018-05-11 06:51:53]  INFO:root:Epoch[1] Batch [7120]	Speed: 580.25 samples/sec	acc=0.302246
+[2018-05-11 06:52:11]  INFO:root:Epoch[1] Batch [7140]	Speed: 583.89 samples/sec	acc=0.307129
+[2018-05-11 06:52:28]  INFO:root:Epoch[1] Batch [7160]	Speed: 584.34 samples/sec	acc=0.312793
+[2018-05-11 06:52:46]  INFO:root:Epoch[1] Batch [7180]	Speed: 586.33 samples/sec	acc=0.301855
+[2018-05-11 06:53:03]  INFO:root:Epoch[1] Batch [7200]	Speed: 585.64 samples/sec	acc=0.307422
+[2018-05-11 06:53:21]  INFO:root:Epoch[1] Batch [7220]	Speed: 584.78 samples/sec	acc=0.296582
+[2018-05-11 06:53:38]  INFO:root:Epoch[1] Batch [7240]	Speed: 584.93 samples/sec	acc=0.296973
+[2018-05-11 06:53:55]  INFO:root:Epoch[1] Batch [7260]	Speed: 586.10 samples/sec	acc=0.303809
+[2018-05-11 06:54:13]  INFO:root:Epoch[1] Batch [7280]	Speed: 584.86 samples/sec	acc=0.306250
+[2018-05-11 06:54:31]  INFO:root:Epoch[1] Batch [7300]	Speed: 584.81 samples/sec	acc=0.298145
+[2018-05-11 06:54:48]  INFO:root:Epoch[1] Batch [7320]	Speed: 583.52 samples/sec	acc=0.305859
+[2018-05-11 06:55:06]  INFO:root:Epoch[1] Batch [7340]	Speed: 583.93 samples/sec	acc=0.310840
+[2018-05-11 06:55:23]  INFO:root:Epoch[1] Batch [7360]	Speed: 583.78 samples/sec	acc=0.306250
+[2018-05-11 06:55:41]  INFO:root:Epoch[1] Batch [7380]	Speed: 582.45 samples/sec	acc=0.305469
+[2018-05-11 06:55:58]  INFO:root:Epoch[1] Batch [7400]	Speed: 584.07 samples/sec	acc=0.295508
+[2018-05-11 06:56:16]  INFO:root:Epoch[1] Batch [7420]	Speed: 587.03 samples/sec	acc=0.307715
+[2018-05-11 06:56:25]  INFO:root:Epoch[1] Train-acc=0.293555
+[2018-05-11 06:56:25]  INFO:root:Epoch[1] Time cost=15294.435
+[2018-05-11 06:56:25]  call reset()
+[2018-05-11 06:56:45]  INFO:root:Epoch[2] Batch [20]	Speed: 601.88 samples/sec	acc=0.349981
+[2018-05-11 06:57:03]  INFO:root:Epoch[2] Batch [40]	Speed: 584.93 samples/sec	acc=0.346875
+[2018-05-11 06:57:20]  INFO:root:Epoch[2] Batch [60]	Speed: 585.45 samples/sec	acc=0.344434
+[2018-05-11 06:57:38]  INFO:root:Epoch[2] Batch [80]	Speed: 584.74 samples/sec	acc=0.356641
+[2018-05-11 06:57:55]  INFO:root:Epoch[2] Batch [100]	Speed: 580.54 samples/sec	acc=0.345020
+[2018-05-11 06:58:13]  INFO:root:Epoch[2] Batch [120]	Speed: 584.26 samples/sec	acc=0.352637
+[2018-05-11 06:58:28]  lr-batch-epoch: 0.1 137 2
+[2018-05-11 06:58:30]  INFO:root:Epoch[2] Batch [140]	Speed: 584.18 samples/sec	acc=0.346973
+[2018-05-11 06:58:48]  INFO:root:Epoch[2] Batch [160]	Speed: 584.73 samples/sec	acc=0.339746
+[2018-05-11 06:59:06]  INFO:root:Epoch[2] Batch [180]	Speed: 584.06 samples/sec	acc=0.338184
+[2018-05-11 06:59:23]  INFO:root:Epoch[2] Batch [200]	Speed: 575.08 samples/sec	acc=0.342480
+[2018-05-11 06:59:41]  INFO:root:Epoch[2] Batch [220]	Speed: 584.74 samples/sec	acc=0.339258
+[2018-05-11 06:59:58]  INFO:root:Epoch[2] Batch [240]	Speed: 586.10 samples/sec	acc=0.340820
+[2018-05-11 07:00:16]  INFO:root:Epoch[2] Batch [260]	Speed: 583.96 samples/sec	acc=0.337012
+[2018-05-11 07:00:33]  INFO:root:Epoch[2] Batch [280]	Speed: 582.56 samples/sec	acc=0.336914
+[2018-05-11 07:00:51]  INFO:root:Epoch[2] Batch [300]	Speed: 583.91 samples/sec	acc=0.337402
+[2018-05-11 07:01:08]  INFO:root:Epoch[2] Batch [320]	Speed: 586.94 samples/sec	acc=0.341309
+[2018-05-11 07:01:26]  INFO:root:Epoch[2] Batch [340]	Speed: 587.00 samples/sec	acc=0.336328
+[2018-05-11 07:01:43]  INFO:root:Epoch[2] Batch [360]	Speed: 585.15 samples/sec	acc=0.346582
+[2018-05-11 07:02:01]  INFO:root:Epoch[2] Batch [380]	Speed: 585.39 samples/sec	acc=0.332715
+[2018-05-11 07:02:19]  INFO:root:Epoch[2] Batch [400]	Speed: 578.60 samples/sec	acc=0.337695
+[2018-05-11 07:02:36]  INFO:root:Epoch[2] Batch [420]	Speed: 584.68 samples/sec	acc=0.335449
+[2018-05-11 07:02:54]  INFO:root:Epoch[2] Batch [440]	Speed: 583.75 samples/sec	acc=0.340723
+[2018-05-11 07:03:11]  INFO:root:Epoch[2] Batch [460]	Speed: 585.06 samples/sec	acc=0.329883
+[2018-05-11 07:03:29]  INFO:root:Epoch[2] Batch [480]	Speed: 586.43 samples/sec	acc=0.329199
+[2018-05-11 07:03:46]  INFO:root:Epoch[2] Batch [500]	Speed: 582.50 samples/sec	acc=0.333691
+[2018-05-11 07:04:04]  INFO:root:Epoch[2] Batch [520]	Speed: 582.16 samples/sec	acc=0.336328
+[2018-05-11 07:04:21]  INFO:root:Epoch[2] Batch [540]	Speed: 584.10 samples/sec	acc=0.329297
+[2018-05-11 07:04:39]  INFO:root:Epoch[2] Batch [560]	Speed: 580.84 samples/sec	acc=0.332910
+[2018-05-11 07:04:56]  INFO:root:Epoch[2] Batch [580]	Speed: 586.19 samples/sec	acc=0.328711
+[2018-05-11 07:05:14]  INFO:root:Epoch[2] Batch [600]	Speed: 579.55 samples/sec	acc=0.329492
+[2018-05-11 07:05:32]  INFO:root:Epoch[2] Batch [620]	Speed: 582.67 samples/sec	acc=0.327441
+[2018-05-11 07:05:49]  INFO:root:Epoch[2] Batch [640]	Speed: 584.39 samples/sec	acc=0.329004
+[2018-05-11 07:06:07]  INFO:root:Epoch[2] Batch [660]	Speed: 585.63 samples/sec	acc=0.317969
+[2018-05-11 07:06:24]  INFO:root:Epoch[2] Batch [680]	Speed: 586.18 samples/sec	acc=0.327832
+[2018-05-11 07:06:42]  INFO:root:Epoch[2] Batch [700]	Speed: 583.46 samples/sec	acc=0.319922
+[2018-05-11 07:06:59]  INFO:root:Epoch[2] Batch [720]	Speed: 584.77 samples/sec	acc=0.322168
+[2018-05-11 07:07:17]  INFO:root:Epoch[2] Batch [740]	Speed: 586.67 samples/sec	acc=0.328418
+[2018-05-11 07:07:34]  INFO:root:Epoch[2] Batch [760]	Speed: 586.84 samples/sec	acc=0.327930
+[2018-05-11 07:07:52]  INFO:root:Epoch[2] Batch [780]	Speed: 585.43 samples/sec	acc=0.326172
+[2018-05-11 07:08:09]  INFO:root:Epoch[2] Batch [800]	Speed: 586.96 samples/sec	acc=0.325098
+[2018-05-11 07:08:27]  INFO:root:Epoch[2] Batch [820]	Speed: 584.76 samples/sec	acc=0.325195
+[2018-05-11 07:08:44]  INFO:root:Epoch[2] Batch [840]	Speed: 578.86 samples/sec	acc=0.319141
+[2018-05-11 07:09:02]  INFO:root:Epoch[2] Batch [860]	Speed: 582.82 samples/sec	acc=0.323535
+[2018-05-11 07:09:19]  INFO:root:Epoch[2] Batch [880]	Speed: 585.75 samples/sec	acc=0.312500
+[2018-05-11 07:09:37]  INFO:root:Epoch[2] Batch [900]	Speed: 585.18 samples/sec	acc=0.329492
+[2018-05-11 07:09:54]  INFO:root:Epoch[2] Batch [920]	Speed: 586.27 samples/sec	acc=0.329395
+[2018-05-11 07:10:12]  INFO:root:Epoch[2] Batch [940]	Speed: 584.88 samples/sec	acc=0.321289
+[2018-05-11 07:10:29]  INFO:root:Epoch[2] Batch [960]	Speed: 583.61 samples/sec	acc=0.321777
+[2018-05-11 07:10:47]  INFO:root:Epoch[2] Batch [980]	Speed: 585.77 samples/sec	acc=0.330957
+[2018-05-11 07:11:04]  INFO:root:Epoch[2] Batch [1000]	Speed: 583.13 samples/sec	acc=0.323437
+[2018-05-11 07:11:22]  INFO:root:Epoch[2] Batch [1020]	Speed: 585.77 samples/sec	acc=0.317480
+[2018-05-11 07:11:39]  INFO:root:Epoch[2] Batch [1040]	Speed: 583.95 samples/sec	acc=0.325781
+[2018-05-11 07:11:57]  INFO:root:Epoch[2] Batch [1060]	Speed: 586.38 samples/sec	acc=0.322461
+[2018-05-11 07:12:14]  INFO:root:Epoch[2] Batch [1080]	Speed: 584.77 samples/sec	acc=0.320117
+[2018-05-11 07:12:32]  INFO:root:Epoch[2] Batch [1100]	Speed: 586.59 samples/sec	acc=0.320215
+[2018-05-11 07:12:49]  INFO:root:Epoch[2] Batch [1120]	Speed: 583.62 samples/sec	acc=0.319629
+[2018-05-11 07:13:04]  lr-batch-epoch: 0.1 1137 2
+[2018-05-11 07:13:04]  testing verification..
+[2018-05-11 07:13:25]  (12000, 128)
+[2018-05-11 07:13:25]  infer time 20.333948
+[2018-05-11 07:13:29]  [lfw][16000]XNorm: 11.046171
+[2018-05-11 07:13:29]  [lfw][16000]Accuracy-Flip: 0.99283+-0.00495
+[2018-05-11 07:13:29]  testing verification..
+[2018-05-11 07:13:53]  (14000, 128)
+[2018-05-11 07:13:53]  infer time 23.315942
+[2018-05-11 07:13:57]  [cfp_fp][16000]XNorm: 8.985355
+[2018-05-11 07:13:57]  [cfp_fp][16000]Accuracy-Flip: 0.87057+-0.01836
+[2018-05-11 07:13:57]  testing verification..
+[2018-05-11 07:14:19]  (12000, 128)
+[2018-05-11 07:14:19]  infer time 21.684085
+[2018-05-11 07:14:23]  [agedb_30][16000]XNorm: 10.955199
+[2018-05-11 07:14:23]  [agedb_30][16000]Accuracy-Flip: 0.94483+-0.01153
+[2018-05-11 07:14:23]  saving 8
+[2018-05-11 07:14:24]  [16000]Accuracy-Highest: 0.94883
+[2018-05-11 07:14:24]  INFO:root:Saved checkpoint to "/data/output/model-y1-arcface-0008.params"
+[2018-05-11 07:14:26]  INFO:root:Epoch[2] Batch [1140]	Speed: 106.23 samples/sec	acc=0.318848
+[2018-05-11 07:14:43]  INFO:root:Epoch[2] Batch [1160]	Speed: 583.29 samples/sec	acc=0.314746
+[2018-05-11 07:15:01]  INFO:root:Epoch[2] Batch [1180]	Speed: 585.83 samples/sec	acc=0.319141
+[2018-05-11 07:15:19]  INFO:root:Epoch[2] Batch [1200]	Speed: 572.82 samples/sec	acc=0.321289
+[2018-05-11 07:15:36]  INFO:root:Epoch[2] Batch [1220]	Speed: 590.94 samples/sec	acc=0.319922
+[2018-05-11 07:15:53]  INFO:root:Epoch[2] Batch [1240]	Speed: 584.98 samples/sec	acc=0.318164
+[2018-05-11 07:16:11]  INFO:root:Epoch[2] Batch [1260]	Speed: 582.80 samples/sec	acc=0.312695
+[2018-05-11 07:16:29]  INFO:root:Epoch[2] Batch [1280]	Speed: 583.76 samples/sec	acc=0.309863
+[2018-05-11 07:16:46]  INFO:root:Epoch[2] Batch [1300]	Speed: 585.77 samples/sec	acc=0.312109
+[2018-05-11 07:17:04]  INFO:root:Epoch[2] Batch [1320]	Speed: 581.29 samples/sec	acc=0.308594
+[2018-05-11 07:17:21]  INFO:root:Epoch[2] Batch [1340]	Speed: 585.76 samples/sec	acc=0.310352
+[2018-05-11 07:17:39]  INFO:root:Epoch[2] Batch [1360]	Speed: 580.54 samples/sec	acc=0.321680
+[2018-05-11 07:17:56]  INFO:root:Epoch[2] Batch [1380]	Speed: 583.75 samples/sec	acc=0.315234
+[2018-05-11 07:18:14]  INFO:root:Epoch[2] Batch [1400]	Speed: 584.68 samples/sec	acc=0.310547
+[2018-05-11 07:18:31]  INFO:root:Epoch[2] Batch [1420]	Speed: 586.52 samples/sec	acc=0.310547
+[2018-05-11 07:18:49]  INFO:root:Epoch[2] Batch [1440]	Speed: 583.58 samples/sec	acc=0.314258
+[2018-05-11 07:19:07]  INFO:root:Epoch[2] Batch [1460]	Speed: 579.54 samples/sec	acc=0.316992
+[2018-05-11 07:19:24]  INFO:root:Epoch[2] Batch [1480]	Speed: 584.55 samples/sec	acc=0.318457
+[2018-05-11 07:19:42]  INFO:root:Epoch[2] Batch [1500]	Speed: 586.22 samples/sec	acc=0.314746
+[2018-05-11 07:19:59]  INFO:root:Epoch[2] Batch [1520]	Speed: 582.33 samples/sec	acc=0.317480
+[2018-05-11 07:20:17]  INFO:root:Epoch[2] Batch [1540]	Speed: 586.63 samples/sec	acc=0.304785
+[2018-05-11 07:20:34]  INFO:root:Epoch[2] Batch [1560]	Speed: 582.16 samples/sec	acc=0.320801
+[2018-05-11 07:20:52]  INFO:root:Epoch[2] Batch [1580]	Speed: 582.92 samples/sec	acc=0.318164
+[2018-05-11 07:21:09]  INFO:root:Epoch[2] Batch [1600]	Speed: 583.55 samples/sec	acc=0.314941
+[2018-05-11 07:21:27]  INFO:root:Epoch[2] Batch [1620]	Speed: 579.29 samples/sec	acc=0.318359
+[2018-05-11 07:21:45]  INFO:root:Epoch[2] Batch [1640]	Speed: 584.80 samples/sec	acc=0.310645
+[2018-05-11 07:22:02]  INFO:root:Epoch[2] Batch [1660]	Speed: 584.81 samples/sec	acc=0.313770
+[2018-05-11 07:22:20]  INFO:root:Epoch[2] Batch [1680]	Speed: 583.67 samples/sec	acc=0.312402
+[2018-05-11 07:22:37]  INFO:root:Epoch[2] Batch [1700]	Speed: 580.88 samples/sec	acc=0.304395
+[2018-05-11 07:22:55]  INFO:root:Epoch[2] Batch [1720]	Speed: 583.42 samples/sec	acc=0.302441
+[2018-05-11 07:23:12]  INFO:root:Epoch[2] Batch [1740]	Speed: 587.26 samples/sec	acc=0.309961
+[2018-05-11 07:23:30]  INFO:root:Epoch[2] Batch [1760]	Speed: 585.23 samples/sec	acc=0.306152
+[2018-05-11 07:23:47]  INFO:root:Epoch[2] Batch [1780]	Speed: 584.23 samples/sec	acc=0.312500
+[2018-05-11 07:24:12]  INFO:root:Epoch[2] Batch [1800]	Speed: 409.18 samples/sec	acc=0.318164
+[2018-05-11 07:24:39]  INFO:root:Epoch[2] Batch [1820]	Speed: 380.79 samples/sec	acc=0.308594
+[2018-05-11 07:24:57]  INFO:root:Epoch[2] Batch [1840]	Speed: 584.57 samples/sec	acc=0.313965
+[2018-05-11 07:25:14]  INFO:root:Epoch[2] Batch [1860]	Speed: 580.51 samples/sec	acc=0.315527
+[2018-05-11 07:25:32]  INFO:root:Epoch[2] Batch [1880]	Speed: 586.61 samples/sec	acc=0.313867
+[2018-05-11 07:25:49]  INFO:root:Epoch[2] Batch [1900]	Speed: 580.66 samples/sec	acc=0.313379
+[2018-05-11 07:26:07]  INFO:root:Epoch[2] Batch [1920]	Speed: 584.15 samples/sec	acc=0.312891
+[2018-05-11 07:26:24]  INFO:root:Epoch[2] Batch [1940]	Speed: 585.36 samples/sec	acc=0.308594
+[2018-05-11 07:26:42]  INFO:root:Epoch[2] Batch [1960]	Speed: 584.50 samples/sec	acc=0.309082
+[2018-05-11 07:26:59]  INFO:root:Epoch[2] Batch [1980]	Speed: 585.93 samples/sec	acc=0.306250
+[2018-05-11 07:27:17]  INFO:root:Epoch[2] Batch [2000]	Speed: 583.64 samples/sec	acc=0.313086
+[2018-05-11 07:27:34]  INFO:root:Epoch[2] Batch [2020]	Speed: 584.14 samples/sec	acc=0.313184
+[2018-05-11 07:27:52]  INFO:root:Epoch[2] Batch [2040]	Speed: 584.95 samples/sec	acc=0.310156
+[2018-05-11 07:28:10]  INFO:root:Epoch[2] Batch [2060]	Speed: 584.71 samples/sec	acc=0.308105
+[2018-05-11 07:28:27]  INFO:root:Epoch[2] Batch [2080]	Speed: 584.82 samples/sec	acc=0.318262
+[2018-05-11 07:28:45]  INFO:root:Epoch[2] Batch [2100]	Speed: 585.41 samples/sec	acc=0.310547
+[2018-05-11 07:29:02]  INFO:root:Epoch[2] Batch [2120]	Speed: 585.50 samples/sec	acc=0.309277
+[2018-05-11 07:29:17]  lr-batch-epoch: 0.1 2137 2
+[2018-05-11 07:29:19]  INFO:root:Epoch[2] Batch [2140]	Speed: 585.92 samples/sec	acc=0.302539
+[2018-05-11 07:29:37]  INFO:root:Epoch[2] Batch [2160]	Speed: 582.28 samples/sec	acc=0.312305
+[2018-05-11 07:29:55]  INFO:root:Epoch[2] Batch [2180]	Speed: 585.00 samples/sec	acc=0.312402
+[2018-05-11 07:30:13]  INFO:root:Epoch[2] Batch [2200]	Speed: 564.33 samples/sec	acc=0.320215
+[2018-05-11 07:30:30]  INFO:root:Epoch[2] Batch [2220]	Speed: 603.10 samples/sec	acc=0.307422
+[2018-05-11 07:30:47]  INFO:root:Epoch[2] Batch [2240]	Speed: 586.19 samples/sec	acc=0.319238
+[2018-05-11 07:31:05]  INFO:root:Epoch[2] Batch [2260]	Speed: 583.74 samples/sec	acc=0.313867
+[2018-05-11 07:31:22]  INFO:root:Epoch[2] Batch [2280]	Speed: 585.22 samples/sec	acc=0.300977
+[2018-05-11 07:31:40]  INFO:root:Epoch[2] Batch [2300]	Speed: 585.99 samples/sec	acc=0.311035
+[2018-05-11 07:31:57]  INFO:root:Epoch[2] Batch [2320]	Speed: 585.31 samples/sec	acc=0.309180
+[2018-05-11 07:32:15]  INFO:root:Epoch[2] Batch [2340]	Speed: 585.88 samples/sec	acc=0.317090
+[2018-05-11 07:32:32]  INFO:root:Epoch[2] Batch [2360]	Speed: 588.10 samples/sec	acc=0.311523
+[2018-05-11 07:32:50]  INFO:root:Epoch[2] Batch [2380]	Speed: 585.00 samples/sec	acc=0.311426
+[2018-05-11 07:33:07]  INFO:root:Epoch[2] Batch [2400]	Speed: 586.02 samples/sec	acc=0.302246
+[2018-05-11 07:33:25]  INFO:root:Epoch[2] Batch [2420]	Speed: 584.77 samples/sec	acc=0.305273
+[2018-05-11 07:33:42]  INFO:root:Epoch[2] Batch [2440]	Speed: 581.47 samples/sec	acc=0.315723
+[2018-05-11 07:34:00]  INFO:root:Epoch[2] Batch [2460]	Speed: 583.64 samples/sec	acc=0.307715
+[2018-05-11 07:34:17]  INFO:root:Epoch[2] Batch [2480]	Speed: 584.70 samples/sec	acc=0.307129
+[2018-05-11 07:34:35]  INFO:root:Epoch[2] Batch [2500]	Speed: 584.30 samples/sec	acc=0.298730
+[2018-05-11 07:34:52]  INFO:root:Epoch[2] Batch [2520]	Speed: 583.44 samples/sec	acc=0.301953
+[2018-05-11 07:35:10]  INFO:root:Epoch[2] Batch [2540]	Speed: 584.90 samples/sec	acc=0.315137
+[2018-05-11 07:35:27]  INFO:root:Epoch[2] Batch [2560]	Speed: 584.83 samples/sec	acc=0.302734
+[2018-05-11 07:35:45]  INFO:root:Epoch[2] Batch [2580]	Speed: 579.62 samples/sec	acc=0.313770
+[2018-05-11 07:36:03]  INFO:root:Epoch[2] Batch [2600]	Speed: 585.13 samples/sec	acc=0.308789
+[2018-05-11 07:36:20]  INFO:root:Epoch[2] Batch [2620]	Speed: 584.39 samples/sec	acc=0.313770
+[2018-05-11 07:36:38]  INFO:root:Epoch[2] Batch [2640]	Speed: 584.36 samples/sec	acc=0.301660
+[2018-05-11 07:36:55]  INFO:root:Epoch[2] Batch [2660]	Speed: 582.89 samples/sec	acc=0.308008
+[2018-05-11 07:37:13]  INFO:root:Epoch[2] Batch [2680]	Speed: 584.26 samples/sec	acc=0.306348
+[2018-05-11 07:37:30]  INFO:root:Epoch[2] Batch [2700]	Speed: 584.37 samples/sec	acc=0.305664
+[2018-05-11 07:37:48]  INFO:root:Epoch[2] Batch [2720]	Speed: 586.00 samples/sec	acc=0.306738
+[2018-05-11 07:38:05]  INFO:root:Epoch[2] Batch [2740]	Speed: 584.19 samples/sec	acc=0.314844
+[2018-05-11 07:38:23]  INFO:root:Epoch[2] Batch [2760]	Speed: 584.80 samples/sec	acc=0.302441
+[2018-05-11 07:38:40]  INFO:root:Epoch[2] Batch [2780]	Speed: 585.56 samples/sec	acc=0.305566
+[2018-05-11 07:38:58]  INFO:root:Epoch[2] Batch [2800]	Speed: 582.37 samples/sec	acc=0.306543
+[2018-05-11 07:39:15]  INFO:root:Epoch[2] Batch [2820]	Speed: 580.14 samples/sec	acc=0.308496
+[2018-05-11 07:39:33]  INFO:root:Epoch[2] Batch [2840]	Speed: 587.47 samples/sec	acc=0.303613
+[2018-05-11 07:39:50]  INFO:root:Epoch[2] Batch [2860]	Speed: 584.75 samples/sec	acc=0.306836
+[2018-05-11 07:40:08]  INFO:root:Epoch[2] Batch [2880]	Speed: 582.91 samples/sec	acc=0.296484
+[2018-05-11 07:40:25]  INFO:root:Epoch[2] Batch [2900]	Speed: 584.91 samples/sec	acc=0.300195
+[2018-05-11 07:40:43]  INFO:root:Epoch[2] Batch [2920]	Speed: 587.59 samples/sec	acc=0.309375
+[2018-05-11 07:41:00]  INFO:root:Epoch[2] Batch [2940]	Speed: 583.24 samples/sec	acc=0.304297
+[2018-05-11 07:41:18]  INFO:root:Epoch[2] Batch [2960]	Speed: 584.03 samples/sec	acc=0.304492
+[2018-05-11 07:41:35]  INFO:root:Epoch[2] Batch [2980]	Speed: 586.25 samples/sec	acc=0.315039
+[2018-05-11 07:41:53]  INFO:root:Epoch[2] Batch [3000]	Speed: 584.70 samples/sec	acc=0.314551
+[2018-05-11 07:42:11]  INFO:root:Epoch[2] Batch [3020]	Speed: 580.81 samples/sec	acc=0.306445
+[2018-05-11 07:42:28]  INFO:root:Epoch[2] Batch [3040]	Speed: 583.34 samples/sec	acc=0.306836
+[2018-05-11 07:42:46]  INFO:root:Epoch[2] Batch [3060]	Speed: 586.01 samples/sec	acc=0.307617
+[2018-05-11 07:43:03]  INFO:root:Epoch[2] Batch [3080]	Speed: 583.13 samples/sec	acc=0.304199
+[2018-05-11 07:43:38]  INFO:root:Epoch[2] Batch [3100]	Speed: 290.92 samples/sec	acc=0.307812
+[2018-05-11 07:44:26]  INFO:root:Epoch[2] Batch [3120]	Speed: 214.03 samples/sec	acc=0.308789
+[2018-05-11 07:44:58]  lr-batch-epoch: 0.1 3137 2
+[2018-05-11 07:44:58]  testing verification..
+[2018-05-11 07:46:29]  (12000, 128)
+[2018-05-11 07:46:29]  infer time 89.558778
+[2018-05-11 07:46:33]  [lfw][18000]XNorm: 11.093253
+[2018-05-11 07:46:33]  [lfw][18000]Accuracy-Flip: 0.99300+-0.00542
+[2018-05-11 07:46:33]  testing verification..
+[2018-05-11 07:48:18]  (14000, 128)
+[2018-05-11 07:48:18]  infer time 103.661837
+[2018-05-11 07:48:22]  [cfp_fp][18000]XNorm: 9.008931
+[2018-05-11 07:48:22]  [cfp_fp][18000]Accuracy-Flip: 0.87286+-0.01761
+[2018-05-11 07:48:22]  testing verification..
+[2018-05-11 07:50:00]  (12000, 128)
+[2018-05-11 07:50:00]  infer time 96.972447
+[2018-05-11 07:50:04]  [agedb_30][18000]XNorm: 10.991505
+[2018-05-11 07:50:04]  [agedb_30][18000]Accuracy-Flip: 0.94383+-0.01278
+[2018-05-11 07:50:04]  saving 9
+[2018-05-11 07:50:08]  INFO:root:Saved checkpoint to "/data/output/model-y1-arcface-0009.params"
+[2018-05-11 07:50:08]  [18000]Accuracy-Highest: 0.94883
+[2018-05-11 07:50:13]  INFO:root:Epoch[2] Batch [3140]	Speed: 29.56 samples/sec	acc=0.314746
+[2018-05-11 07:50:51]  INFO:root:Epoch[2] Batch [3160]	Speed: 264.64 samples/sec	acc=0.306836
+[2018-05-11 07:51:32]  INFO:root:Epoch[2] Batch [3180]	Speed: 254.09 samples/sec	acc=0.309277
+[2018-05-11 07:52:14]  INFO:root:Epoch[2] Batch [3200]	Speed: 243.54 samples/sec	acc=0.294727
+[2018-05-11 07:52:47]  INFO:root:Epoch[2] Batch [3220]	Speed: 304.52 samples/sec	acc=0.308984
+[2018-05-11 07:53:05]  INFO:root:Epoch[2] Batch [3240]	Speed: 589.89 samples/sec	acc=0.308008
+[2018-05-11 07:53:22]  INFO:root:Epoch[2] Batch [3260]	Speed: 582.90 samples/sec	acc=0.312695
+[2018-05-11 07:53:40]  INFO:root:Epoch[2] Batch [3280]	Speed: 584.71 samples/sec	acc=0.312305
+[2018-05-11 07:53:57]  INFO:root:Epoch[2] Batch [3300]	Speed: 585.15 samples/sec	acc=0.309570
+[2018-05-11 07:54:15]  INFO:root:Epoch[2] Batch [3320]	Speed: 583.59 samples/sec	acc=0.307227
+[2018-05-11 07:54:32]  INFO:root:Epoch[2] Batch [3340]	Speed: 583.51 samples/sec	acc=0.305762
+[2018-05-11 07:54:50]  INFO:root:Epoch[2] Batch [3360]	Speed: 584.24 samples/sec	acc=0.307715
+[2018-05-11 07:55:07]  INFO:root:Epoch[2] Batch [3380]	Speed: 586.71 samples/sec	acc=0.304980
+[2018-05-11 07:55:25]  INFO:root:Epoch[2] Batch [3400]	Speed: 587.17 samples/sec	acc=0.314063
+[2018-05-11 07:55:42]  INFO:root:Epoch[2] Batch [3420]	Speed: 584.91 samples/sec	acc=0.309668
+[2018-05-11 07:56:00]  INFO:root:Epoch[2] Batch [3440]	Speed: 586.59 samples/sec	acc=0.312207
+[2018-05-11 07:56:17]  INFO:root:Epoch[2] Batch [3460]	Speed: 586.10 samples/sec	acc=0.314941
+[2018-05-11 07:56:35]  INFO:root:Epoch[2] Batch [3480]	Speed: 585.28 samples/sec	acc=0.300879
+[2018-05-11 07:56:52]  INFO:root:Epoch[2] Batch [3500]	Speed: 582.41 samples/sec	acc=0.311133
+[2018-05-11 07:57:10]  INFO:root:Epoch[2] Batch [3520]	Speed: 584.97 samples/sec	acc=0.311621
+[2018-05-11 07:57:27]  INFO:root:Epoch[2] Batch [3540]	Speed: 585.62 samples/sec	acc=0.305078
+[2018-05-11 07:57:45]  INFO:root:Epoch[2] Batch [3560]	Speed: 582.72 samples/sec	acc=0.309961
+[2018-05-11 07:58:02]  INFO:root:Epoch[2] Batch [3580]	Speed: 582.12 samples/sec	acc=0.305566
+[2018-05-11 07:58:20]  INFO:root:Epoch[2] Batch [3600]	Speed: 583.92 samples/sec	acc=0.304883
+[2018-05-11 07:58:38]  INFO:root:Epoch[2] Batch [3620]	Speed: 583.25 samples/sec	acc=0.304590
+[2018-05-11 07:58:55]  INFO:root:Epoch[2] Batch [3640]	Speed: 584.97 samples/sec	acc=0.307227
+[2018-05-11 07:59:13]  INFO:root:Epoch[2] Batch [3660]	Speed: 583.56 samples/sec	acc=0.311914
+[2018-05-11 07:59:30]  INFO:root:Epoch[2] Batch [3680]	Speed: 583.89 samples/sec	acc=0.299023
+[2018-05-11 07:59:48]  INFO:root:Epoch[2] Batch [3700]	Speed: 585.71 samples/sec	acc=0.309277
+[2018-05-11 08:00:05]  INFO:root:Epoch[2] Batch [3720]	Speed: 585.40 samples/sec	acc=0.304590
+[2018-05-11 08:00:23]  INFO:root:Epoch[2] Batch [3740]	Speed: 587.18 samples/sec	acc=0.307031
+[2018-05-11 08:00:40]  INFO:root:Epoch[2] Batch [3760]	Speed: 583.56 samples/sec	acc=0.301563
+[2018-05-11 08:00:58]  INFO:root:Epoch[2] Batch [3780]	Speed: 581.39 samples/sec	acc=0.303711
+[2018-05-11 08:01:15]  INFO:root:Epoch[2] Batch [3800]	Speed: 582.66 samples/sec	acc=0.303223
+[2018-05-11 08:01:33]  INFO:root:Epoch[2] Batch [3820]	Speed: 583.96 samples/sec	acc=0.305664
+[2018-05-11 08:01:50]  INFO:root:Epoch[2] Batch [3840]	Speed: 585.61 samples/sec	acc=0.301855
+[2018-05-11 08:02:08]  INFO:root:Epoch[2] Batch [3860]	Speed: 583.84 samples/sec	acc=0.301758
+[2018-05-11 08:02:26]  INFO:root:Epoch[2] Batch [3880]	Speed: 571.05 samples/sec	acc=0.300391
+[2018-05-11 08:02:43]  INFO:root:Epoch[2] Batch [3900]	Speed: 598.25 samples/sec	acc=0.304199
+[2018-05-11 08:03:00]  INFO:root:Epoch[2] Batch [3920]	Speed: 585.38 samples/sec	acc=0.316016
+[2018-05-11 08:03:18]  INFO:root:Epoch[2] Batch [3940]	Speed: 584.03 samples/sec	acc=0.311523
+[2018-05-11 08:03:35]  INFO:root:Epoch[2] Batch [3960]	Speed: 585.31 samples/sec	acc=0.305762
+[2018-05-11 08:03:53]  INFO:root:Epoch[2] Batch [3980]	Speed: 584.44 samples/sec	acc=0.303516
+[2018-05-11 08:04:10]  INFO:root:Epoch[2] Batch [4000]	Speed: 585.95 samples/sec	acc=0.300879
+[2018-05-11 08:04:28]  INFO:root:Epoch[2] Batch [4020]	Speed: 582.11 samples/sec	acc=0.302734
+[2018-05-11 08:04:45]  INFO:root:Epoch[2] Batch [4040]	Speed: 586.67 samples/sec	acc=0.302637
+[2018-05-11 08:05:03]  INFO:root:Epoch[2] Batch [4060]	Speed: 581.80 samples/sec	acc=0.298438
+[2018-05-11 08:05:21]  INFO:root:Epoch[2] Batch [4080]	Speed: 585.67 samples/sec	acc=0.297070
+[2018-05-11 08:05:38]  INFO:root:Epoch[2] Batch [4100]	Speed: 583.42 samples/sec	acc=0.302344
+[2018-05-11 08:05:56]  INFO:root:Epoch[2] Batch [4120]	Speed: 583.52 samples/sec	acc=0.306055
+[2018-05-11 08:06:10]  lr-batch-epoch: 0.1 4137 2
+[2018-05-11 08:06:13]  INFO:root:Epoch[2] Batch [4140]	Speed: 587.72 samples/sec	acc=0.301758
+[2018-05-11 08:06:31]  INFO:root:Epoch[2] Batch [4160]	Speed: 585.12 samples/sec	acc=0.296680
+[2018-05-11 08:06:48]  INFO:root:Epoch[2] Batch [4180]	Speed: 584.48 samples/sec	acc=0.304688
+[2018-05-11 08:07:06]  INFO:root:Epoch[2] Batch [4200]	Speed: 585.90 samples/sec	acc=0.316699
+[2018-05-11 08:07:23]  INFO:root:Epoch[2] Batch [4220]	Speed: 586.51 samples/sec	acc=0.307520
+[2018-05-11 08:07:41]  INFO:root:Epoch[2] Batch [4240]	Speed: 583.71 samples/sec	acc=0.312207
+[2018-05-11 08:07:58]  INFO:root:Epoch[2] Batch [4260]	Speed: 583.71 samples/sec	acc=0.302637
+[2018-05-11 08:08:16]  INFO:root:Epoch[2] Batch [4280]	Speed: 584.97 samples/sec	acc=0.305078
+[2018-05-11 08:08:33]  INFO:root:Epoch[2] Batch [4300]	Speed: 586.42 samples/sec	acc=0.307227
+[2018-05-11 08:08:51]  INFO:root:Epoch[2] Batch [4320]	Speed: 584.29 samples/sec	acc=0.311914
+[2018-05-11 08:09:08]  INFO:root:Epoch[2] Batch [4340]	Speed: 586.07 samples/sec	acc=0.303906
+[2018-05-11 08:09:26]  INFO:root:Epoch[2] Batch [4360]	Speed: 586.32 samples/sec	acc=0.300684
+[2018-05-11 08:09:43]  INFO:root:Epoch[2] Batch [4380]	Speed: 587.34 samples/sec	acc=0.307324
+[2018-05-11 08:10:00]  INFO:root:Epoch[2] Batch [4400]	Speed: 587.12 samples/sec	acc=0.308984
+[2018-05-11 08:10:18]  INFO:root:Epoch[2] Batch [4420]	Speed: 583.80 samples/sec	acc=0.311133
+[2018-05-11 08:10:35]  INFO:root:Epoch[2] Batch [4440]	Speed: 585.55 samples/sec	acc=0.300879
+[2018-05-11 08:10:53]  INFO:root:Epoch[2] Batch [4460]	Speed: 584.84 samples/sec	acc=0.305957
+[2018-05-11 08:11:11]  INFO:root:Epoch[2] Batch [4480]	Speed: 584.04 samples/sec	acc=0.311328
+[2018-05-11 08:11:28]  INFO:root:Epoch[2] Batch [4500]	Speed: 585.65 samples/sec	acc=0.300684
+[2018-05-11 08:11:45]  INFO:root:Epoch[2] Batch [4520]	Speed: 585.52 samples/sec	acc=0.304297
+[2018-05-11 08:12:03]  INFO:root:Epoch[2] Batch [4540]	Speed: 582.20 samples/sec	acc=0.305469
+[2018-05-11 08:12:21]  INFO:root:Epoch[2] Batch [4560]	Speed: 584.95 samples/sec	acc=0.305566
+[2018-05-11 08:12:38]  INFO:root:Epoch[2] Batch [4580]	Speed: 585.48 samples/sec	acc=0.310156
+[2018-05-11 08:12:56]  INFO:root:Epoch[2] Batch [4600]	Speed: 585.60 samples/sec	acc=0.304102
+[2018-05-11 08:13:13]  INFO:root:Epoch[2] Batch [4620]	Speed: 584.32 samples/sec	acc=0.307227
+[2018-05-11 08:13:31]  INFO:root:Epoch[2] Batch [4640]	Speed: 581.69 samples/sec	acc=0.302246
+[2018-05-11 08:13:48]  INFO:root:Epoch[2] Batch [4660]	Speed: 583.30 samples/sec	acc=0.303125
+[2018-05-11 08:14:06]  INFO:root:Epoch[2] Batch [4680]	Speed: 584.23 samples/sec	acc=0.308496
+[2018-05-11 08:14:23]  INFO:root:Epoch[2] Batch [4700]	Speed: 586.21 samples/sec	acc=0.304883
+[2018-05-11 08:14:41]  INFO:root:Epoch[2] Batch [4720]	Speed: 583.01 samples/sec	acc=0.309277
+[2018-05-11 08:14:58]  INFO:root:Epoch[2] Batch [4740]	Speed: 585.19 samples/sec	acc=0.305078
+[2018-05-11 08:15:16]  INFO:root:Epoch[2] Batch [4760]	Speed: 585.27 samples/sec	acc=0.308594
+[2018-05-11 08:15:33]  INFO:root:Epoch[2] Batch [4780]	Speed: 585.23 samples/sec	acc=0.299707
+[2018-05-11 08:15:58]  INFO:root:Epoch[2] Batch [4800]	Speed: 410.13 samples/sec	acc=0.299219
+[2018-05-11 08:16:54]  INFO:root:Epoch[2] Batch [4820]	Speed: 184.07 samples/sec	acc=0.307227
+[2018-05-11 08:17:42]  INFO:root:Epoch[2] Batch [4840]	Speed: 211.29 samples/sec	acc=0.306055
+[2018-05-11 08:18:26]  INFO:root:Epoch[2] Batch [4860]	Speed: 232.11 samples/sec	acc=0.311328
+[2018-05-11 08:19:15]  INFO:root:Epoch[2] Batch [4880]	Speed: 211.91 samples/sec	acc=0.310937
+[2018-05-11 08:20:05]  INFO:root:Epoch[2] Batch [4900]	Speed: 203.00 samples/sec	acc=0.307617
+[2018-05-11 08:21:01]  INFO:root:Epoch[2] Batch [4920]	Speed: 184.80 samples/sec	acc=0.306836
+[2018-05-11 08:21:51]  INFO:root:Epoch[2] Batch [4940]	Speed: 205.43 samples/sec	acc=0.309570
+[2018-05-11 08:22:47]  INFO:root:Epoch[2] Batch [4960]	Speed: 180.79 samples/sec	acc=0.302148
+[2018-05-11 08:23:41]  INFO:root:Epoch[2] Batch [4980]	Speed: 189.61 samples/sec	acc=0.315625
+[2018-05-11 08:24:29]  INFO:root:Epoch[2] Batch [5000]	Speed: 214.37 samples/sec	acc=0.302441
+[2018-05-11 08:25:16]  INFO:root:Epoch[2] Batch [5020]	Speed: 218.94 samples/sec	acc=0.306152
+[2018-05-11 08:26:12]  INFO:root:Epoch[2] Batch [5040]	Speed: 180.43 samples/sec	acc=0.304199
+[2018-05-11 08:27:01]  INFO:root:Epoch[2] Batch [5060]	Speed: 212.13 samples/sec	acc=0.314160
+[2018-05-11 08:27:54]  INFO:root:Epoch[2] Batch [5080]	Speed: 191.74 samples/sec	acc=0.306738
+[2018-05-11 08:28:55]  INFO:root:Epoch[2] Batch [5100]	Speed: 167.28 samples/sec	acc=0.305078
+[2018-05-11 08:29:56]  INFO:root:Epoch[2] Batch [5120]	Speed: 168.52 samples/sec	acc=0.303027
+[2018-05-11 08:30:41]  lr-batch-epoch: 0.1 5137 2
+[2018-05-11 08:30:41]  testing verification..
+[2018-05-11 08:32:35]  (12000, 128)
+[2018-05-11 08:32:35]  infer time 112.738731
+[2018-05-11 08:32:39]  [lfw][20000]XNorm: 11.362240
+[2018-05-11 08:32:39]  [lfw][20000]Accuracy-Flip: 0.99267+-0.00484
+[2018-05-11 08:32:39]  testing verification..
+[2018-05-11 08:34:59]  (14000, 128)
+[2018-05-11 08:34:59]  infer time 138.115967
+[2018-05-11 08:35:03]  [cfp_fp][20000]XNorm: 9.181505
+[2018-05-11 08:35:03]  [cfp_fp][20000]Accuracy-Flip: 0.87729+-0.01629
+[2018-05-11 08:35:03]  testing verification..
+[2018-05-11 08:36:57]  (12000, 128)
+[2018-05-11 08:36:57]  infer time 113.395626
+[2018-05-11 08:37:00]  [agedb_30][20000]XNorm: 11.152935
+[2018-05-11 08:37:00]  [agedb_30][20000]Accuracy-Flip: 0.94767+-0.01241
+[2018-05-11 08:37:00]  saving 10
+[2018-05-11 08:37:01]  INFO:root:Saved checkpoint to "/data/output/model-y1-arcface-0010.params"
+[2018-05-11 08:37:01]  [20000]Accuracy-Highest: 0.94883
+[2018-05-11 08:37:07]  INFO:root:Epoch[2] Batch [5140]	Speed: 23.74 samples/sec	acc=0.305566
+[2018-05-11 08:37:55]  INFO:root:Epoch[2] Batch [5160]	Speed: 214.10 samples/sec	acc=0.310449
+[2018-05-11 08:38:13]  INFO:root:Epoch[2] Batch [5180]	Speed: 583.67 samples/sec	acc=0.307715
+[2018-05-11 08:38:30]  INFO:root:Epoch[2] Batch [5200]	Speed: 584.37 samples/sec	acc=0.302051
+[2018-05-11 08:38:48]  INFO:root:Epoch[2] Batch [5220]	Speed: 584.41 samples/sec	acc=0.299805
+[2018-05-11 08:39:05]  INFO:root:Epoch[2] Batch [5240]	Speed: 586.24 samples/sec	acc=0.301660
+[2018-05-11 08:39:23]  INFO:root:Epoch[2] Batch [5260]	Speed: 578.90 samples/sec	acc=0.314160
+[2018-05-11 08:39:40]  INFO:root:Epoch[2] Batch [5280]	Speed: 588.67 samples/sec	acc=0.304492
+[2018-05-11 08:39:58]  INFO:root:Epoch[2] Batch [5300]	Speed: 584.93 samples/sec	acc=0.306543
+[2018-05-11 08:40:15]  INFO:root:Epoch[2] Batch [5320]	Speed: 585.91 samples/sec	acc=0.301758
+[2018-05-11 08:40:33]  INFO:root:Epoch[2] Batch [5340]	Speed: 584.59 samples/sec	acc=0.300586
+[2018-05-11 08:40:50]  INFO:root:Epoch[2] Batch [5360]	Speed: 584.00 samples/sec	acc=0.306348
+[2018-05-11 08:41:08]  INFO:root:Epoch[2] Batch [5380]	Speed: 583.53 samples/sec	acc=0.308398
+[2018-05-11 08:41:25]  INFO:root:Epoch[2] Batch [5400]	Speed: 583.44 samples/sec	acc=0.307715
+[2018-05-11 08:41:50]  INFO:root:Epoch[2] Batch [5420]	Speed: 412.45 samples/sec	acc=0.307715
+[2018-05-11 08:42:54]  INFO:root:Epoch[2] Batch [5440]	Speed: 160.32 samples/sec	acc=0.299902
+[2018-05-11 08:43:53]  INFO:root:Epoch[2] Batch [5460]	Speed: 175.43 samples/sec	acc=0.302832
+[2018-05-11 08:44:52]  INFO:root:Epoch[2] Batch [5480]	Speed: 171.84 samples/sec	acc=0.296680
+[2018-05-11 08:45:09]  INFO:root:Epoch[2] Batch [5500]	Speed: 604.29 samples/sec	acc=0.300879
+[2018-05-11 08:45:27]  INFO:root:Epoch[2] Batch [5520]	Speed: 583.08 samples/sec	acc=0.301074
+[2018-05-11 08:45:44]  INFO:root:Epoch[2] Batch [5540]	Speed: 585.17 samples/sec	acc=0.310742
+[2018-05-11 08:46:02]  INFO:root:Epoch[2] Batch [5560]	Speed: 586.41 samples/sec	acc=0.309473
+[2018-05-11 08:46:19]  INFO:root:Epoch[2] Batch [5580]	Speed: 585.54 samples/sec	acc=0.306250
+[2018-05-11 08:46:37]  INFO:root:Epoch[2] Batch [5600]	Speed: 587.04 samples/sec	acc=0.303125
+[2018-05-11 08:46:54]  INFO:root:Epoch[2] Batch [5620]	Speed: 584.96 samples/sec	acc=0.304199
+[2018-05-11 08:47:12]  INFO:root:Epoch[2] Batch [5640]	Speed: 581.88 samples/sec	acc=0.305078
+[2018-05-11 08:47:29]  INFO:root:Epoch[2] Batch [5660]	Speed: 585.57 samples/sec	acc=0.297754
+[2018-05-11 08:48:09]  INFO:root:Epoch[2] Batch [5680]	Speed: 257.60 samples/sec	acc=0.301270
+[2018-05-11 08:49:01]  INFO:root:Epoch[2] Batch [5700]	Speed: 197.75 samples/sec	acc=0.304297
+[2018-05-11 08:49:59]  INFO:root:Epoch[2] Batch [5720]	Speed: 176.94 samples/sec	acc=0.309082
+[2018-05-11 08:51:01]  INFO:root:Epoch[2] Batch [5740]	Speed: 164.41 samples/sec	acc=0.309570
+[2018-05-11 08:52:04]  INFO:root:Epoch[2] Batch [5760]	Speed: 162.94 samples/sec	acc=0.308887
+[2018-05-11 08:53:01]  INFO:root:Epoch[2] Batch [5780]	Speed: 179.52 samples/sec	acc=0.308789
+[2018-05-11 08:54:01]  INFO:root:Epoch[2] Batch [5800]	Speed: 169.18 samples/sec	acc=0.300000
+[2018-05-11 08:55:00]  Task is force ended by user

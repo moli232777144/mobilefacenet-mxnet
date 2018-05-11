@@ -1,5 +1,10 @@
 
 ---
+## 5月11日更新
+
+实验二验证补充实验：增加lr0.1，+40000steps，lr 0.01，+20000steps，初步判断单卡延长迭代步数有效，lfw提升至99.5+的次数增加，agedb可达到95.9+；继续实验延长迭代次数，判断整体最终稳定情况；
+
+---
 ## 5月10日更新
 
 更新ncnn转换测试步骤；
@@ -46,7 +51,6 @@ parameter of the last layers after the global operator (GDConv or GAPool) being 
 修复错误：--wd设置0.00004，--fc7-wd-mult设置10，重新进行试验；
 
 实验日志：softmax训练的acc持续提升，lfw上99+，转下一步训练；
-
 
 ---
 
