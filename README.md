@@ -1,3 +1,12 @@
+---
+## 5月16日更新
+
+经多位网友的共同实验，原方案部分情况下迭代次数稍微不足，导致最终识别率略有小差异，为了相对容易获得论文的最佳结果，对训练方案进行简单更新，实际训练也可根据数据acc训练是否已稳定来判断lr下降的迭代次数：
+
+- 适当增大softmax迭代次数，4万-->12万；
+- 增大arcface第一级lr0.1的迭代次数，8万-->12万；
+
+ps：无闲置机器，暂不再更新log。该项目训练步骤，已验证mobilefacenet可复现，良心大作，期待作者后续的研究。
 
 ---
 ## 5月14日更新
@@ -7,8 +16,6 @@
 2. arcface_loss_test2-5：接arcface_loss_test2-4最佳结果的模型进行精调，margin_s=128，延长了lr0.001迭代次数40000，最终部分结果中lfw最佳结果99.500%，agedb有模型已提升至96.150%+，该步骤对lfw未有提升，对agedb提升比较有效，略微超过论文的96.07%；
 
 ps：issues已有人训练出比论文相对更佳的结果，lfw：99.583，agedb：96.083。
-
-
 
 ---
 ## 5月11日更新
@@ -63,6 +70,7 @@ parameter of the last layers after the global operator (GDConv or GAPool) being 
 
 实验日志：softmax训练的acc持续提升，lfw上99+，转下一步训练；
 
+
 ---
 
 ## 前言
@@ -76,7 +84,7 @@ parameter of the last layers after the global operator (GDConv or GAPool) being 
 ## 训练步骤
 1.拉取配置[insightface](https://github.com/deepinsight/insightface)工程的基础环境；
 
-2.softmax loss初调：lr0.1，softmax的fc7配置wd_mult=10.0和no_bias=True,训练4万步;
+2.softmax loss初调：lr0.1，softmax的fc7配置wd_mult=10.0和no_bias=True,训练12万步;
 
 切换到src目录下，修改train_softmax.py：
 179-182行：
@@ -109,22 +117,22 @@ parameter of the last layers after the global operator (GDConv or GAPool) being 
 
 运行：
 ```
-CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss-type 0 --lr-steps 80000,120000 --wd 0.00004 --fc7-wd-mult 10 --per-batch-size 512 --emb-size 128  --data-dir  ../datasets/faces_ms1m_112x112  --prefix ../models/MobileFaceNet/model-y1-softmax
+CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss-type 0 --lr-steps 120000,140000 --wd 0.00004 --fc7-wd-mult 10 --per-batch-size 512 --emb-size 128  --data-dir  ../datasets/faces_ms1m_112x112  --prefix ../models/MobileFaceNet/model-y1-softmax
 ```
  
 
-3.arcface loss调试：s=64, m=0.5, 起始lr=0.1，在[80000, 120000, 140000, 160000]步处降低lr，总共训练16万步。这时，LFW acc能到0.9955左右，agedb-30 acc能到0.959以上。
+3.arcface loss调试：s=64, m=0.5, 起始lr=0.1，在[120000, 160000, 180000, 200000]步处降低lr，总共训练20万步，也可通过判断acc是否稳定后下降lr。该步骤，LFW acc能到0.9955左右，agedb-30 acc能到0.95以上。
 
 切换到src目录下：
 
 ```
-CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss-type 4 --lr-steps 80000,120000,140000,160000 --wd 0.00004 --fc7-wd-mult 10 --emb-size 128 --per-batch-size 512 --data-dir ../datasets/faces_ms1m_112x112 --pretrained ../models/MobileFaceNet/model-y1-softmax,20 --prefix ../models/MobileFaceNet/model-y1-arcface
+CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss-type 4 --lr-steps 120000,160000,180000,200000 --wd 0.00004 --fc7-wd-mult 10 --emb-size 128 --per-batch-size 512 --data-dir ../datasets/faces_ms1m_112x112 --pretrained ../models/MobileFaceNet/model-y1-softmax,60 --prefix ../models/MobileFaceNet/model-y1-arcface
 ```
 
 4.agedb精调：从3步训练好的模型继续用arcface loss训练，s=128, m=0.5，起始lr=0.001，在[20000, 30000, 40000]步降低lr，这时能得到lfw acc 0.9955左右，agedb-30 acc 0.96左右的最终模型。
 
 ```
-CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss-type 4 --lr 0.001 --lr-steps 20000,30000,40000 --wd 0.00004 --fc7-wd-mult 10 --emb-size 128 --per-batch-size 512 --margin-s 128 --data-dir ../datasets/faces_ms1m_112x112 --pretrained ../models/MobileFaceNet/model-y1-arcface,80 --prefix ../models/MobileFaceNet/model-y1-arcface
+CUDA_VISIBLE_DEVICES='0' python -u train_softmax.py --network y1 --ckpt 2 --loss-type 4 --lr 0.001 --lr-steps 20000,30000,40000 --wd 0.00004 --fc7-wd-mult 10 --emb-size 128 --per-batch-size 512 --margin-s 128 --data-dir ../datasets/faces_ms1m_112x112 --pretrained ../models/MobileFaceNet/model-y1-arcface,100 --prefix ../models/MobileFaceNet/model-y1-arcface
 ```
 
 
@@ -153,7 +161,7 @@ cd /data/local/tmp/
 chmod 0775 benchncnn
 ./benchncnn 8 8 0
 ```
-ps:该转换与论文相比，仍未合并前置计算无用的BN层，速度和内存占用非最优值。
+ps:该转换与论文相比，缺少BN层合并至Conv层操作，速度和内存占用非最优值，相关测试大致可提速10%。
 
 附高通625粗略测试结果：
 四线程：
